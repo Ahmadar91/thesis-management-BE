@@ -1,7 +1,7 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import se.lnu.thesis_mangment.model.Task;
+import se.lnu.thesis_mangment.model.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 public class TaskController
 {
-    private List<Task> documentsList;
+    private List<Document> documentsList;
 
     public TaskController()
     {
@@ -19,29 +19,29 @@ public class TaskController
 
     // @RequestMapping(value = {"","/", "/home"}, method = RequestMethod.GET)
     @RequestMapping(value = {"/submit"}, method = RequestMethod.POST)
-    public void submit(@RequestBody Task task)
+    public void submit(@RequestBody Document task)
     {
         documentsList.add(task);
     }
 
     @RequestMapping(value = {"/delete"}, method = RequestMethod.DELETE)
-    public void delete(@RequestBody Task task)
+    public void delete(@RequestBody Document task)
     {
         documentsList.remove(task);
     }
 
     @RequestMapping(value = {"/edit"}, method = RequestMethod.PUT)
-    public void edit(Task oldTask, Task newTask)
+    public void edit(Document oldTask, Document newTask)
     {
         documentsList.set(documentsList.indexOf(oldTask), newTask);
     }
 
-    public List<Task> getDocumentsList()
+    public List<Document> getDocumentsList()
     {
         return documentsList;
     }
 
-    public void setDocumentsList(List<Task> documentsList)
+    public void setDocumentsList(List<Document> documentsList)
     {
         this.documentsList = documentsList;
     }

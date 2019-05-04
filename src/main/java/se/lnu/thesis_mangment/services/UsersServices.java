@@ -2,25 +2,27 @@ package se.lnu.thesis_mangment.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.lnu.thesis_mangment.repositories.RolesRepository;
 import se.lnu.thesis_mangment.model.Role;
+import se.lnu.thesis_mangment.model.User;
+import se.lnu.thesis_mangment.model.UsersInput;
+import se.lnu.thesis_mangment.repositories.UsersRepository;
 
 import java.util.List;
 
 @Service
-public class RolesService
+public class UsersServices
 {
     @Autowired
-    private RolesRepository repository;
+    private UsersRepository repository;
 
-    public List<Role> get()
+    public List<User> get(UsersInput input)
     {
-        return repository.get();
+        return repository.get(input);
     }
 
     public Long count()
     {
-        return repository.count(Role.class);
+        return repository.count(User.class);
     }
 
     public Role create(Role item)
@@ -30,7 +32,7 @@ public class RolesService
 
     public List<Long> delete(List<Long> list)
     {
-        repository.delete(list, Role.class);
+        repository.delete(list, User.class);
         return list;
     }
 }

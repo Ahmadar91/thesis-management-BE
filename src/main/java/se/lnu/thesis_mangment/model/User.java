@@ -1,17 +1,31 @@
 package se.lnu.thesis_mangment.model;
 
 import javax.management.relation.Role;
-import javax.persistence.Entity;
-import java.util.UUID;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "users")
 public class User
 {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String email;
+    @Column
     private String password;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = se.lnu.thesis_mangment.model.Role.class)
+    @JoinColumn(name = "role_id")
     private Role role;
+    @Column
     private String name;
+
+    public User()
+    {
+
+    }
 
     public Long getId()
     {

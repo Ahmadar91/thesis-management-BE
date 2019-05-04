@@ -1,4 +1,4 @@
-package se.lnu.thesis_mangment.repositories.roles;
+package se.lnu.thesis_mangment.repositories;
 
 import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.Role;

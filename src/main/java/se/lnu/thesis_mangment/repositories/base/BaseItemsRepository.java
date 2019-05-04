@@ -11,14 +11,13 @@ public abstract class BaseItemsRepository<T> extends BaseRepository
 
     public List<T> getIn(List<Long> list, Class<T> cls)
     {
-        return selectAll("FROM " + cls.getName() + " AS t " + "where t.deleted = 0 and " + "(t.id in (:ids))", cls, new Parameter<>("ids", list));
+        return selectAll("FROM " + cls.getName() + " AS t " + "where " + "(t.id in (:ids))", cls, new Parameter<>("ids", list));
     }
 
     public Long count(Class<T> cls)
     {
-        return select("SELECT count(*) FROM " + cls.getName() + " AS t " + "where " + "t.deleted = 0", Long.class);
+        return select("SELECT count(*) FROM " + cls.getName() + " AS t ", Long.class);
     }
-
 
     @Transactional
     public void delete(List<Long> list, Class<T> cls)
