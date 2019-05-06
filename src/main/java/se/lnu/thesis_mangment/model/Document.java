@@ -35,7 +35,7 @@ public class Document
     //   @Column(name = "grade_num")
     private int gradeNum;
     //  @Column(name = "passed")
-    private int passed;
+    private int gradePass;
 
     public Long getId()
     {
@@ -117,13 +117,14 @@ public class Document
         this.gradeNum = gradeNum;
     }
 
-    public int getPassed()
+
+    public int getGradePass()
     {
-        return passed;
+        return gradePass;
     }
 
-    public void setPassed(int passed)
+    public void setGradePass(int gradePass)
     {
-        this.passed = passed;
+        this.gradePass = gradePass;
     }
 }

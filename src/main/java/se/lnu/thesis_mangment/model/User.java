@@ -7,25 +7,30 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User
 {
+    //  @ManyToOne(fetch = FetchType.LAZY, targetEntity = se.lnu.thesis_mangment.model.Role.class)
+    //  @JoinColumn(name = "role_id")
+    //   private Role role;
+    private long roleId;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String username;
+    @Column
+    private String firstName;
+
 
     @Column
     private String email;
     @Column
     private String password;
-
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = se.lnu.thesis_mangment.model.Role.class)
-    @JoinColumn(name = "role_id")
-    private Role role;
-    @Column
-    private String name;
+    private Long deleted;
 
     public User()
     {
 
     }
+
 
     public Long getId()
     {
@@ -57,33 +62,63 @@ public class User
         this.password = password;
     }
 
-    public Role getRole()
-    {
-        return role;
-    }
-
-    public void setRole(Role role)
-    {
-        this.role = role;
-    }
-
-    public void setRole(String role)
-    {
-        this.role.setRoleName(role);
-    }
-
     public boolean isSignedIn()
     {
         return false;
     }
 
-    public String getName()
+    public Long getDeleted()
     {
-        return name;
+        return deleted;
     }
 
-    public void setName(String name)
+    public void setDeleted(Long deleted)
     {
-        this.name = name;
+        this.deleted = deleted;
     }
+
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+
+    public long getRoleId()
+    {
+        return roleId;
+    }
+
+    public void setRoleId(long roleId)
+    {
+        this.roleId = roleId;
+    }
+//    public Role getRole()
+//    {
+//        return role;
+//    }
+//
+//    public void setRole(Role role)
+//    {
+//        this.role = role;
+//    }
+//
+//    public void setRole(String role)
+//    {
+//        this.role.setRoleName(role);
+//    }
 }
