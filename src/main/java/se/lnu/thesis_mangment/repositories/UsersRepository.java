@@ -46,10 +46,10 @@ public class UsersRepository extends BaseItemsRepository<User>
                 {
                     add("and t.email = :email ", "email", input.getEmail());
                 }
-                if ((input.getPassword() != null) && (!input.getPassword().isEmpty()))
-                {
-                    add("and t.password = :password ", "password", input.getPassword());
-                }
+//                if ((input.getPassword() != null) && (!input.getPassword().isEmpty()))
+//                {
+//                    add("and t.password = :password ", "password", input.getPassword());
+//                }
             }
         }
     }
