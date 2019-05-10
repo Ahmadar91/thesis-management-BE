@@ -14,8 +14,10 @@ public class UsersRepository extends BaseItemsRepository<User>
     public List<User> get(UsersInput input)
     {
         var searchBuilder = new UsersSearchBuilder(input);
-        var stmt = "FROM User AS t " + "left join fetch t.role " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
-        return selectAll(stmt, User.class, searchBuilder.getParameterList());
+        //      var stmt = "FROM User AS t " + "left join fetch t.role " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        var res = selectAll(stmt, User.class, searchBuilder.getParameterList());
+        return res;
     }
 
     private class UsersSearchBuilder extends SearchBuilder
@@ -24,30 +26,30 @@ public class UsersRepository extends BaseItemsRepository<User>
         {
             if (input != null)
             {
-                if ((input.getUserId() > 0))
+                if ((input.getId() > 0))
                 {
-                    add("and t.role = :roleId ", "roleId", input.getRoleId());
+                    add("and t.id = :id ", "id", input.getId());
                 }
-                if ((input.getUserName() != null) && (!input.getUserName().isEmpty()))
+                if ((input.getUsername() != null) && (!input.getUsername().isEmpty()))
                 {
-                    add("and t.username = :username ", "username", "%" + input.getUserName() + "%");
+                    add("and t.username = :username ", "username", input.getUsername());
                 }
                 if ((input.getRoleId() > 0))
                 {
-                    add("and t.role = :roleId ", "roleId", input.getRoleId());
+                    add("and t.roleId = :roleId ", "roleId", input.getRoleId());
                 }
-                if ((!input.getFirstName().isEmpty()) && (input.getFirstName() != null))
+                if ((input.getFirstName() != null) && (!input.getFirstName().isEmpty()))
                 {
                     add("and t.firstName = :firstName ", "firstName", input.getFirstName());
                 }
-                if ((!input.getEmail().isEmpty()) && (input.getEmail() != null))
+                if ((input.getEmail() != null) && (!input.getEmail().isEmpty()))
                 {
                     add("and t.email = :email ", "email", input.getEmail());
                 }
-                if ((!input.getPassword().isEmpty()) && (input.getPassword() != null))
-                {
-                    add("and t.password = :password ", "password", input.getPassword());
-                }
+//                if ((input.getPassword() != null) && (!input.getPassword().isEmpty()))
+//                {
+//                    add("and t.password = :password ", "password", input.getPassword());
+//                }
             }
         }
     }

@@ -1,7 +1,6 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.lnu.thesis_mangment.model.UsersInput;
@@ -17,27 +16,34 @@ public class UserController extends Controller
     @Autowired
     private UsersServices usersService;
 
-    @RequestMapping("")
+    @RequestMapping("/get")
     public HashMap<String, Object> get(@Valid UsersInput input)
     {
-        return response(new ResponseArgument<>("Roles are", usersService.get(input)));
+        return response(new ResponseArgument<>("Users are", usersService.get(input)));
     }
 
-    @RequestMapping("/signUp/{id}")
-    public void signUp(@RequestBody String firstName, @RequestBody String lastName, @RequestBody String email, @RequestBody String password)
-    {
+//    @RequestMapping("/add")
+//    public void add(@Valid UsersInput input)
+//    {
+//
+//    }
 
-    }
+//    @RequestMapping("/signUp/{id}")
+//    public void signUp(@RequestBody String firstName, @RequestBody String lastName, @RequestBody String email, @RequestBody String password)
+//    {
+//
+//    }
+//
+//    @RequestMapping("/signIn")
+//    public void signIn()
+//    {
+//
+//    }
+//
+//    @RequestMapping("/signOut")
+//    public void signOut()
+//    {
+//
+//    }
 
-    @RequestMapping("/signIn")
-    public void signIn()
-    {
-
-    }
-
-    @RequestMapping("/signOut")
-    public void signOut()
-    {
-
-    }
 }

@@ -23,7 +23,6 @@ public class RolesController extends Controller
     @RequestMapping("")
     public HashMap<String, Object> getRoles(@Valid UsersInput input)
     {
-
         return response(new ResponseArgument<>("Roles are", rolesService.get()));
     }
 
