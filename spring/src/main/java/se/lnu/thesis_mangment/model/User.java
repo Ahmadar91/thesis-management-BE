@@ -1,6 +1,5 @@
 package se.lnu.thesis_mangment.model;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 
 @Entity
