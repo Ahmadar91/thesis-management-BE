@@ -10,6 +10,8 @@ public class UsersInput
 
     private long roleId;
 
+
+    private String password;
     private long id;
 
     @Size(max = 255)
@@ -84,5 +86,14 @@ public class UsersInput
         this.username = username;
     }
 
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
 
 }

@@ -1,11 +1,13 @@
 package se.lnu.thesis_mangment.repositories;
 
 import org.springframework.stereotype.Repository;
+import se.lnu.thesis_mangment.model.LoginInput;
 import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.model.UsersInput;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -18,6 +20,20 @@ public class UsersRepository extends BaseItemsRepository<User>
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         var res = selectAll(stmt, User.class, searchBuilder.getParameterList());
         return res;
+    }
+
+    // can be used to authinticate a user
+    public User getUser(LoginInput inputs)
+    {
+        var searchBuilder = new UsersSearchBuilder(inputs);
+        var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        return select(stmt, User.class, searchBuilder.getParameterList());
+    }
+
+    @Transactional
+    public void add(User user)
+    {
+        save(user);
     }
 
     private class UsersSearchBuilder extends SearchBuilder

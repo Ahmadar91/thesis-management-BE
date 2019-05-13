@@ -18,13 +18,13 @@ public class DocumentRepository extends BaseItemsRepository<Document>
         return selectAll(stmt, Document.class, searchBuilder.getParameterList());
     }
 
+
     private class DocumentSearchBuilder extends SearchBuilder
     {
         DocumentSearchBuilder(DocumentInput input)
         {
             if (input != null)
             {
-
                 if ((input.getTitle() != null) && (!input.getTitle().isEmpty()))
                 {
                     add("and t.title = :title ", "title", "%" + input.getTitle() + "%");
