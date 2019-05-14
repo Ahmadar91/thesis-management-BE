@@ -6,27 +6,36 @@ public class DocumentInput
 {
 
     @NotNull
-    private int authorId = 0;
-
-    @NotNull
-    private int opponentId = 0;
-
+    private int authorId;
     @NotNull
     private String title;
 
-    @NotNull
+    private Document document;
+    private int opponentId;
+
+    public Document getDocument()
+    {
+        return document;
+    }
+
+    public void setDocument(Document document)
+    {
+        this.document = document;
+//        document.setAuthorId(this.authorId);
+//        document.setGradeNum(gradeNum);
+//        document.setOpponentId(opponentId);
+//        document.setOpponentFeedbackId(opponentFeedbackId);
+//        document.setTitle(title);
+    }
+
     private int supervisorId;
 
-    @NotNull
     private int readerFeedbackId;
 
-    @NotNull
     private int opponentFeedbackId;
 
-    @NotNull
     private int gradeNum = 0;
 
-    @NotNull
     private int gradePass = 0;
 
     public int getAuthorId()

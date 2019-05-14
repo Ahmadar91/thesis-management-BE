@@ -33,7 +33,7 @@ public class UserController extends Controller
         user.setUsername(input.getUsername());
         user.setPassword(input.getPassword());
         user.setRoleId(input.getRoleId());
-        //   user.setId(input.getId());
+
         userService.add(user);
         return response(new ResponseArgument<>("User is", user));
     }

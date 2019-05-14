@@ -7,6 +7,7 @@ public class LoginInput extends UsersInput
 {
 
 
+
     @Size(max = 255)
     private String username;
 
@@ -15,6 +16,7 @@ public class LoginInput extends UsersInput
 
 
     private long roleId;
+
 
     public String getPassword()
     {

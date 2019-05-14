@@ -12,25 +12,32 @@ public class Document
     //  @Column(name = "title")
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
-    private User author;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "author_id")
+//    private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "opponent_id")
-    private User opponent;
+    private long authorId;
+    private long opponentId;
+    private long supervisorId;
+    private long readerFeedbackId;
+    private long opponentFeedbackId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "supervisor_id")
-    private User supervisor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reader_feedback_id")
-    private Feedback readerFeedback;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "opponent_feedback_id")
-    private Feedback opponentFeedback;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "opponent_id")
+//    private User opponent;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "supervisor_id")
+//    private User supervisor;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "reader_feedback_id")
+//    private Feedback readerFeedback;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "opponent_feedback_id")
+//    private Feedback opponentFeedback;
 
     //   @Column(name = "grade_num")
     private int gradeNum;
@@ -47,25 +54,7 @@ public class Document
         this.id = id;
     }
 
-    public User getAuthor()
-    {
-        return author;
-    }
 
-    public void setAuthor(User author)
-    {
-        this.author = author;
-    }
-
-    public User getOpponent()
-    {
-        return opponent;
-    }
-
-    public void setOpponent(User opponent)
-    {
-        this.opponent = opponent;
-    }
 
     public String getTitle()
     {
@@ -77,35 +66,11 @@ public class Document
         this.title = title;
     }
 
-    public User getSupervisor()
-    {
-        return supervisor;
-    }
 
-    public void setSupervisor(User supervisor)
-    {
-        this.supervisor = supervisor;
-    }
 
-    public Feedback getReaderFeedback()
-    {
-        return readerFeedback;
-    }
 
-    public void setReaderFeedback(Feedback readerFeedback)
-    {
-        this.readerFeedback = readerFeedback;
-    }
 
-    public Feedback getOpponentFeedback()
-    {
-        return opponentFeedback;
-    }
 
-    public void setOpponentFeedback(Feedback opponentFeedback)
-    {
-        this.opponentFeedback = opponentFeedback;
-    }
 
     public int getGradeNum()
     {
@@ -126,5 +91,55 @@ public class Document
     public void setGradePass(int gradePass)
     {
         this.gradePass = gradePass;
+    }
+
+    public long getAuthorId()
+    {
+        return authorId;
+    }
+
+    public void setAuthorId(long authorId)
+    {
+        this.authorId = authorId;
+    }
+
+    public long getOpponentId()
+    {
+        return opponentId;
+    }
+
+    public void setOpponentId(long opponentId)
+    {
+        this.opponentId = opponentId;
+    }
+
+    public long getSupervisorId()
+    {
+        return supervisorId;
+    }
+
+    public void setSupervisorId(long supervisorId)
+    {
+        this.supervisorId = supervisorId;
+    }
+
+    public long getReaderFeedbackId()
+    {
+        return readerFeedbackId;
+    }
+
+    public void setReaderFeedbackId(long readerFeedbackId)
+    {
+        this.readerFeedbackId = readerFeedbackId;
+    }
+
+    public long getOpponentFeedbackId()
+    {
+        return opponentFeedbackId;
+    }
+
+    public void setOpponentFeedbackId(long opponentFeedbackId)
+    {
+        this.opponentFeedbackId = opponentFeedbackId;
     }
 }

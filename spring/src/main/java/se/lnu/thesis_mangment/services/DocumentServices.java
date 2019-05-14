@@ -6,10 +6,11 @@ import se.lnu.thesis_mangment.model.*;
 import se.lnu.thesis_mangment.repositories.DocumentRepository;
 import se.lnu.thesis_mangment.repositories.UsersRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class DocumentService
+public class DocumentServices
 {
     @Autowired
     private DocumentRepository repository;
@@ -35,5 +36,10 @@ public class DocumentService
         return list;
     }
 
+    @Transactional
+    public void add(Document document)
+    {
+        repository.add(document);
+    }
 
 }

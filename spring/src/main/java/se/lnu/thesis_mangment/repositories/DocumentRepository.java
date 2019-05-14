@@ -3,9 +3,11 @@ package se.lnu.thesis_mangment.repositories;
 import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.Document;
 import se.lnu.thesis_mangment.model.DocumentInput;
+import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -16,6 +18,12 @@ public class DocumentRepository extends BaseItemsRepository<Document>
         var searchBuilder = new DocumentSearchBuilder(input);
         var stmt = "FROM Document AS t " + "left join fetch t.role " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         return selectAll(stmt, Document.class, searchBuilder.getParameterList());
+    }
+
+    @Transactional
+    public void add(Document document)
+    {
+        save(document);
     }
 
 
