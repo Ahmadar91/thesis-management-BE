@@ -1,16 +1,16 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import se.lnu.thesis_mangment.model.Document;
 import se.lnu.thesis_mangment.model.DocumentInput;
 import se.lnu.thesis_mangment.services.DocumentServices;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -54,6 +54,14 @@ public class DocumentController extends Controller
         Document newDocument = getDocumentFromInput(input);
         //  documentServices.update(newDocument);
         // return response(new ResponseArgument<>("Document is", newDocument));
+    }
+
+    //@RequestMapping("/upload")
+    @PostMapping(value = "/upload")
+    //   @ResponseStatus(HttpStatus.OK)
+    public void handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException
+    {
+        documentServices.storeFile(file);
     }
 
     private Document getDocumentFromInput(DocumentInput input)

@@ -2,12 +2,16 @@ package se.lnu.thesis_mangment.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import se.lnu.thesis_mangment.model.*;
 import se.lnu.thesis_mangment.repositories.DocumentRepository;
-import se.lnu.thesis_mangment.repositories.UsersRepository;
 import se.lnu.thesis_mangment.repositories.base.BaseItemRepository;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -36,6 +40,13 @@ public class DocumentServices
     {
         repository.delete(list, Document.class);
         return list;
+    }
+
+    public void storeFile(MultipartFile file) throws IOException
+    {
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get("./src/main/resources/uploads/" + file.getOriginalFilename());
+        Files.write(path, bytes);
     }
 
 //    public List<Long> delete(Long id)
