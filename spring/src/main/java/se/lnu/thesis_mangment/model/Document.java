@@ -8,6 +8,7 @@ public class Document
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
     //  @Column(name = "title")
     private String title;
@@ -21,6 +22,8 @@ public class Document
     private long supervisorId;
     private long readerFeedbackId;
     private long opponentFeedbackId;
+
+    private long deleted;
 
 
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -141,5 +144,15 @@ public class Document
     public void setOpponentFeedbackId(long opponentFeedbackId)
     {
         this.opponentFeedbackId = opponentFeedbackId;
+    }
+
+    public long getDeleted()
+    {
+        return deleted;
+    }
+
+    public void setDeleted(long deleted)
+    {
+        this.deleted = deleted;
     }
 }

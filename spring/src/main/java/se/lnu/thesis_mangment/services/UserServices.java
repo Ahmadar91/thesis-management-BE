@@ -16,7 +16,7 @@ public class UserServices
     @Autowired
     private UsersRepository repository;
 
-    public User get(LoginInput input)
+    public User get(UsersInput input)
     {
         return repository.getUser(input);
     }

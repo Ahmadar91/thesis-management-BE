@@ -1,7 +1,6 @@
 package se.lnu.thesis_mangment.repositories;
 
 import org.springframework.stereotype.Repository;
-import se.lnu.thesis_mangment.model.LoginInput;
 import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.model.UsersInput;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
@@ -18,12 +17,11 @@ public class UsersRepository extends BaseItemsRepository<User>
         var searchBuilder = new UsersSearchBuilder(input);
         //      var stmt = "FROM User AS t " + "left join fetch t.role " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
-        var res = selectAll(stmt, User.class, searchBuilder.getParameterList());
-        return res;
+        return selectAll(stmt, User.class, searchBuilder.getParameterList());
     }
 
     // can be used to authinticate a user
-    public User getUser(LoginInput inputs)
+    public User getUser(UsersInput inputs)
     {
         var searchBuilder = new UsersSearchBuilder(inputs);
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();

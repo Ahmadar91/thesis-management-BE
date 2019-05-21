@@ -1,20 +1,20 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import se.lnu.thesis_mangment.model.Document;
 import se.lnu.thesis_mangment.model.DocumentInput;
-import se.lnu.thesis_mangment.model.LoginInput;
-import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.services.DocumentServices;
-import se.lnu.thesis_mangment.services.UserServices;
 
-import javax.print.Doc;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.HashMap;
 
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/document")
 public class DocumentController extends Controller
@@ -22,21 +22,39 @@ public class DocumentController extends Controller
     @Autowired
     private DocumentServices documentServices;
 
-    @RequestMapping("/get")
+
+    @RequestMapping(value = "/get")
     public HashMap<String, Object> get(@Valid DocumentInput input)
     {
-        return response(new ResponseArgument<>("Document is", documentServices.get(input)));
+        return response(new ResponseArgument<>("document", documentServices.get(input)));
     }
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @Transactional
     public HashMap<String, Object> add(@Valid DocumentInput input)
     {
         Document document = getDocumentFromInput(input);
         documentServices.add(document);
-        return response(new ResponseArgument<>("User is", document));
+        return response(new ResponseArgument<>("document", document));
     }
 
+    @RequestMapping("/{id}")
+    @Transactional
+    public HashMap<String, Object> update(@Valid DocumentInput input)
+    {
+        Document newDocument = getDocumentFromInput(input);
+        documentServices.update(newDocument, input.getId());
+        return response(new ResponseArgument<>("document", newDocument));
+    }
+
+    @RequestMapping("/remove")
+    @Transactional
+    public void delete(@Valid DocumentInput input)
+    {
+        Document newDocument = getDocumentFromInput(input);
+        //  documentServices.update(newDocument);
+        // return response(new ResponseArgument<>("Document is", newDocument));
+    }
 
     private Document getDocumentFromInput(DocumentInput input)
     {

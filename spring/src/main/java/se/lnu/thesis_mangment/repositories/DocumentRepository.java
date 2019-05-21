@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.Document;
 import se.lnu.thesis_mangment.model.DocumentInput;
 import se.lnu.thesis_mangment.model.User;
+import se.lnu.thesis_mangment.repositories.base.BaseItemRepository;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
@@ -16,7 +17,7 @@ public class DocumentRepository extends BaseItemsRepository<Document>
     public List<Document> get(DocumentInput input)
     {
         var searchBuilder = new DocumentSearchBuilder(input);
-        var stmt = "FROM Document AS t " + "left join fetch t.role " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        var stmt = "FROM Document AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         return selectAll(stmt, Document.class, searchBuilder.getParameterList());
     }
 
@@ -26,6 +27,14 @@ public class DocumentRepository extends BaseItemsRepository<Document>
         save(document);
     }
 
+    @Transactional
+    public void update(Document document)
+    {
+        update1(document);
+    }
+
+
+
 
     private class DocumentSearchBuilder extends SearchBuilder
     {
@@ -33,6 +42,10 @@ public class DocumentRepository extends BaseItemsRepository<Document>
         {
             if (input != null)
             {
+                if ((input.getId() > 0))
+                {
+                    add("and t.id = :id ", "id", input.getId());
+                }
                 if ((input.getTitle() != null) && (!input.getTitle().isEmpty()))
                 {
                     add("and t.title = :title ", "title", "%" + input.getTitle() + "%");

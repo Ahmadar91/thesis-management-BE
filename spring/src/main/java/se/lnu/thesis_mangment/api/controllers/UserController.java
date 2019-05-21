@@ -1,6 +1,7 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.lnu.thesis_mangment.model.LoginInput;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/user")
 public class UserController extends Controller
 {
@@ -20,9 +22,13 @@ public class UserController extends Controller
     private UserServices userService;
 
     @RequestMapping("/get")
-    public HashMap<String, Object> get(@Valid LoginInput input)
+    public HashMap<String, Object> get(@Valid UsersInput input) throws IllegalAccessException
     {
-        return response(new ResponseArgument<>("User is", userService.get(input)));
+        if (!input.validatePassword())
+        {
+            throw new IllegalAccessException();
+        }
+        return response(new ResponseArgument<>("user", userService.get(input)));
     }
 
     @RequestMapping("/add")
@@ -32,10 +38,10 @@ public class UserController extends Controller
         User user = new User();
         user.setUsername(input.getUsername());
         user.setPassword(input.getPassword());
-        user.setRoleId(input.getRoleId());
+        //       user.setRoleId(input.getRoleId());
 
         userService.add(user);
-        return response(new ResponseArgument<>("User is", user));
+        return response(new ResponseArgument<>("user", user));
     }
 
 //    @RequestMapping("/signUp/{id}")

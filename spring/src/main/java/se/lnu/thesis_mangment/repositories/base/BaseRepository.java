@@ -2,6 +2,7 @@ package se.lnu.thesis_mangment.repositories.base;
 
 
 import org.springframework.transaction.annotation.Transactional;
+import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.repositories.query.Parameter;
 
 import javax.persistence.EntityManager;
@@ -67,12 +68,7 @@ public class BaseRepository
         return t;
     }
 
-    @Transactional
-    public <T> T update(T t)
-    {
-        entityManager.merge(t);
-        return t;
-    }
+
 
 
     public <T> List<T> saveAll(List<T> list)
@@ -115,6 +111,12 @@ public class BaseRepository
         return query.getSingleResult();
     }
 
+    @Transactional
+    public <T> T update1(T t)
+    {
+        entityManager.merge(t);
+        return t;
+    }
 
     public int update(String hql, Parameter... args)
     {
@@ -125,4 +127,6 @@ public class BaseRepository
         }
         return query.executeUpdate();
     }
+
+
 }

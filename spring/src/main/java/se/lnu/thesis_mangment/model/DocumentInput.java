@@ -1,120 +1,130 @@
 package se.lnu.thesis_mangment.model;
 
-import javax.validation.constraints.NotNull;
 
 public class DocumentInput
 {
 
-    @NotNull
-    private int authorId;
-    @NotNull
+
+    private long id;
+
+    private long authorId;
+
+    private long supervisorId;
+
+    private long readerFeedbackId;
+
+    private long opponentFeedbackId;
+
+    private int gradeNum;
+
+    private int gradePass;
+
     private String title;
 
-    private Document document;
-    private int opponentId;
 
-    public Document getDocument()
+    private long opponentId;
+
+
+    public long getId()
     {
-        return document;
+        return id;
     }
 
-    public void setDocument(Document document)
+    public void setId(long id)
     {
-        this.document = document;
-//        document.setAuthorId(this.authorId);
-//        document.setGradeNum(gradeNum);
-//        document.setOpponentId(opponentId);
-//        document.setOpponentFeedbackId(opponentFeedbackId);
-//        document.setTitle(title);
+        this.id = id;
     }
 
-    private int supervisorId;
-
-    private int readerFeedbackId;
-
-    private int opponentFeedbackId;
-
-    private int gradeNum = 0;
-
-    private int gradePass = 0;
-
-    public int getAuthorId()
+    public long getAuthorId()
     {
         return authorId;
     }
 
-    public void setAuthorId(int authorId)
+    public void setAuthorId(long authorId)
     {
         this.authorId = authorId;
     }
 
-    public int getOpponentId()
-    {
-        return opponentId;
-    }
 
-    public void setOpponentId(int opponentId)
-    {
-        this.opponentId = opponentId;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
-    public int getSupervisorId()
+    public long getSupervisorId()
     {
         return supervisorId;
     }
 
-    public void setSupervisorId(int supervisorId)
+
+    public void setSupervisorId(long supervisorId)
     {
         this.supervisorId = supervisorId;
     }
 
-    public int getReaderFeedbackId()
+
+    public long getReaderFeedbackId()
     {
         return readerFeedbackId;
     }
 
-    public void setReaderFeedbackId(int readerFeedbackId)
+
+    public void setReaderFeedbackId(long readerFeedbackId)
     {
         this.readerFeedbackId = readerFeedbackId;
     }
 
-    public int getOpponentFeedbackId()
+    public long getOpponentFeedbackId()
     {
         return opponentFeedbackId;
     }
 
-    public void setOpponentFeedbackId(int opponentFeedbackId)
+
+    public void setOpponentFeedbackId(long opponentFeedbackId)
     {
         this.opponentFeedbackId = opponentFeedbackId;
     }
+
 
     public int getGradeNum()
     {
         return gradeNum;
     }
 
+
     public void setGradeNum(int gradeNum)
     {
         this.gradeNum = gradeNum;
     }
+
 
     public int getGradePass()
     {
         return gradePass;
     }
 
+
     public void setGradePass(int gradePass)
     {
         this.gradePass = gradePass;
+    }
+
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+
+    public long getOpponentId()
+    {
+        return opponentId;
+    }
+
+
+    public void setOpponentId(long opponentId)
+    {
+        this.opponentId = opponentId;
     }
 }

@@ -4,6 +4,7 @@ import javax.validation.constraints.Size;
 
 public class UsersInput
 {
+    private long id;
 
     @Size(max = 255)
     private String filterValue;
@@ -12,7 +13,7 @@ public class UsersInput
 
 
     private String password;
-    private long id;
+
 
     @Size(max = 255)
     private String firstName;
@@ -96,4 +97,8 @@ public class UsersInput
         this.password = password;
     }
 
+    public boolean validatePassword()
+    {
+        return password != null;
+    }
 }

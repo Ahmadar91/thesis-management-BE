@@ -1,6 +1,7 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/roles")
 public class RolesController extends Controller
 {
@@ -23,13 +25,13 @@ public class RolesController extends Controller
     @RequestMapping("")
     public HashMap<String, Object> getRoles(@Valid UsersInput input)
     {
-        return response(new ResponseArgument<>("Roles are", rolesService.get()));
+        return response(new ResponseArgument<>("role", rolesService.get()));
     }
 
 
     @RequestMapping("{id}")
     public HashMap<String, Object> getRole(@PathVariable("id") long id)
     {
-        return response(new ResponseArgument<>("Roles are", rolesService.get()));
+        return response(new ResponseArgument<>("role", rolesService.get()));
     }
 }
