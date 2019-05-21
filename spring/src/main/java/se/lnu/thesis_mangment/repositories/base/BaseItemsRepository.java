@@ -24,4 +24,11 @@ public abstract class BaseItemsRepository<T> extends BaseRepository
     {
         update("UPDATE " + cls.getName() + " AS t " + "set t.deleted = t.id " + "WHERE " + "t.id IN (:ids)", new Parameter<>("ids", list));
     }
+
+    //added 21/5
+    @Transactional
+    public void updateItem(T item, Class<T> cls)
+    {
+        update("UPDATE " + cls.getName() + " AS t " + "set t.deleted = t.id " + "WHERE " + "t.id IN (:ids)", new Parameter<>("ids", item));
+    }
 }

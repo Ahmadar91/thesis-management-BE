@@ -30,7 +30,7 @@ public class DocumentRepository extends BaseItemsRepository<Document>
     @Transactional
     public void update(Document document)
     {
-        update1(document);
+        updateItem(document, Document.class);
     }
 
 
@@ -48,29 +48,29 @@ public class DocumentRepository extends BaseItemsRepository<Document>
                 }
                 if ((input.getTitle() != null) && (!input.getTitle().isEmpty()))
                 {
-                    add("and t.title = :title ", "title", "%" + input.getTitle() + "%");
+                    add("and t.title = :title ", "title", input.getTitle());
                 }
 
                 if ((input.getAuthorId() > 0))
                 {
-                    add("and t.author = :authorId ", "authorId", input.getAuthorId());
+                    add("and t.authorId = :authorId ", "authorId", input.getAuthorId());
                 }
 
                 if ((input.getOpponentId() > 0))
                 {
-                    add("and t.opponent = :opponentId ", "opponentId", input.getOpponentId());
+                    add("and t.opponentId = :opponentId ", "opponentId", input.getOpponentId());
                 }
                 if ((input.getSupervisorId() > 0))
                 {
-                    add("and t.supervisor = :supervisorId ", "supervisorId", input.getSupervisorId());
+                    add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
                 }
                 if ((input.getReaderFeedbackId() > 0))
                 {
-                    add("and t.readerFeedback = :readerFeedbackId ", "readerFeedbackId", input.getReaderFeedbackId());
+                    add("and t.readerFeedbackId = :readerFeedbackId ", "readerFeedbackId", input.getReaderFeedbackId());
                 }
                 if ((input.getOpponentFeedbackId() > 0))
                 {
-                    add("and t.opponentFeedback = :opponentFeedbackId ", "opponentFeedbackId", input.getOpponentFeedbackId());
+                    add("and t.opponentFeedbackId = :opponentFeedbackId ", "opponentFeedbackId", input.getOpponentFeedbackId());
                 }
 
                 if ((input.getGradeNum() > 0))
