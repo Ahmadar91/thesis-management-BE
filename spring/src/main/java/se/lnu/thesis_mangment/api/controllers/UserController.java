@@ -3,6 +3,7 @@ package se.lnu.thesis_mangment.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import se.lnu.thesis_mangment.model.LoginInput;
 import se.lnu.thesis_mangment.model.User;
@@ -31,35 +32,17 @@ public class UserController extends Controller
         return response(new ResponseArgument<>("user", userService.get(input)));
     }
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @Transactional
-    public HashMap<String, Object> add(@Valid LoginInput input)
+    public HashMap<String, Object> add(@Valid UsersInput input)
     {
         User user = new User();
         user.setUsername(input.getUsername());
         user.setPassword(input.getPassword());
-        //       user.setRoleId(input.getRoleId());
+        user.setRoleId(input.getRoleId());
 
         userService.add(user);
         return response(new ResponseArgument<>("user", user));
     }
-
-//    @RequestMapping("/signUp/{id}")
-//    public void signUp(@RequestBody String firstName, @RequestBody String lastName, @RequestBody String email, @RequestBody String password)
-//    {
-//
-//    }
-//
-//    @RequestMapping("/signIn")
-//    public void signIn()
-//    {
-//
-//    }
-//
-//    @RequestMapping("/signOut")
-//    public void signOut()
-//    {
-//
-//    }
 
 }

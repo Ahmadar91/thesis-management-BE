@@ -7,11 +7,10 @@ public class LoginInput extends UsersInput
 {
 
 
-
-    @Size(max = 255)
+    //  @Size(max = 255)
     private String username;
 
-    @NotNull
+    //   @NotNull
     private String password;
 
 

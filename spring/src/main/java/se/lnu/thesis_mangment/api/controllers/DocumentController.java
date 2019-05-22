@@ -38,6 +38,13 @@ public class DocumentController extends Controller
         return response(new ResponseArgument<>("document", document));
     }
 
+    @PostMapping(value = "/upload")
+    //   @ResponseStatus(HttpStatus.OK)
+    public void handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException
+    {
+        documentServices.storeFile(file);
+    }
+
     @RequestMapping("/{id}")
     @Transactional
     public HashMap<String, Object> update(@Valid DocumentInput input)
@@ -57,12 +64,6 @@ public class DocumentController extends Controller
     }
 
     //@RequestMapping("/upload")
-    @PostMapping(value = "/upload")
-    //   @ResponseStatus(HttpStatus.OK)
-    public void handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException
-    {
-        documentServices.storeFile(file);
-    }
 
     private Document getDocumentFromInput(DocumentInput input)
     {
