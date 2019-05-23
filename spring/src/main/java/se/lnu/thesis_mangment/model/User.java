@@ -15,16 +15,13 @@ public class User
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    private String username;
-    @Column
-    private String firstName;
 
-
-    @Column
-    private String email;
-    @Column
-    private String password;
-    private Long deleted;
+    private String username = "";
+    private String firstName = "";
+    private String lastName = "";
+    private String email = "";
+    private String password = "";
+    private Long deleted = 0L;
 
     public User()
     {
@@ -62,9 +59,15 @@ public class User
         this.password = password;
     }
 
-    public boolean isSignedIn()
+
+    public String getLastName()
     {
-        return false;
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
     }
 
     public Long getDeleted()

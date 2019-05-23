@@ -9,9 +9,10 @@ public class UsersInput
     @Size(max = 255)
     private String filterValue;
 
-    private long roleId;
+    // student as default
+    private long roleId = 1L;
 
-
+    private long deleted;
     private String password;
 
 
