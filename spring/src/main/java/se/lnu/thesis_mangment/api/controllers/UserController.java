@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import se.lnu.thesis_mangment.model.LoginInput;
 import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.model.UsersInput;
 import se.lnu.thesis_mangment.services.UserServices;
@@ -33,7 +32,7 @@ public class UserController extends Controller
     }
 
     @RequestMapping("/get")
-    public HashMap<String, Object> get(@Valid UsersInput input) throws IllegalAccessException
+    public HashMap<String, Object> get(@Valid UsersInput input)
     {
         return response(new ResponseArgument<>("user", userService.get(input)));
     }
@@ -42,13 +41,20 @@ public class UserController extends Controller
     @Transactional
     public HashMap<String, Object> add(@Valid UsersInput input)
     {
+        User user = setUser(input);
+        userService.add(user);
+        return response(new ResponseArgument<>("user", user));
+    }
+
+    private User setUser(UsersInput input)
+    {
         User user = new User();
         user.setUsername(input.getUsername());
         user.setPassword(input.getPassword());
         user.setRoleId(input.getRoleId());
-
-        userService.add(user);
-        return response(new ResponseArgument<>("user", user));
+        user.setEmail(input.getEmail());
+        user.setLastName(input.getEmail());
+        return user;
     }
 
 }

@@ -1,7 +1,7 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.lnu.thesis_mangment.model.Document;
@@ -39,11 +39,19 @@ public class DocumentController extends Controller
     }
 
     @PostMapping(value = "/upload")
-    //   @ResponseStatus(HttpStatus.OK)
     public void handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException
     {
         documentServices.storeFile(file);
     }
+
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public Resource download(@Valid DocumentInput input) throws IOException
+    {
+        String fileName = input.getId() + ".pdf";
+        return documentServices.downloadFile(fileName);
+
+    }
+
 
     @RequestMapping("/{id}")
     @Transactional

@@ -13,6 +13,28 @@ public class Document
     //  @Column(name = "title")
     private String title;
 
+    private String type;
+    private long supervisorFeedbackId;
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
+    }
+
+    public long getSupervisorFeedbackId()
+    {
+        return supervisorFeedbackId;
+    }
+
+    public void setSupervisorFeedbackId(long supervisorFeedbackId)
+    {
+        this.supervisorFeedbackId = supervisorFeedbackId;
+    }
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "author_id")
 //    private User author;

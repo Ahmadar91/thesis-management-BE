@@ -1,14 +1,18 @@
 package se.lnu.thesis_mangment.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import se.lnu.thesis_mangment.model.*;
+import se.lnu.thesis_mangment.model.Document;
+import se.lnu.thesis_mangment.model.DocumentInput;
 import se.lnu.thesis_mangment.repositories.DocumentRepository;
 import se.lnu.thesis_mangment.repositories.base.BaseItemRepository;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,6 +51,19 @@ public class DocumentServices
         byte[] bytes = file.getBytes();
         Path path = Paths.get("./src/main/resources/uploads/" + file.getOriginalFilename());
         Files.write(path, bytes);
+    }
+
+    public Resource downloadFile(String fileName) throws MalformedURLException
+    {
+
+        Path path = Paths.get("./src/main/resources/uploads/" + fileName);
+        path.resolve(fileName).normalize();
+        Resource resource = new UrlResource(path.toUri());
+        if (resource.exists())
+        {
+            return resource;
+        }
+        return null;
     }
 
 //    public List<Long> delete(Long id)

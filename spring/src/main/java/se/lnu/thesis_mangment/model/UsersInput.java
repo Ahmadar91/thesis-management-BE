@@ -14,6 +14,7 @@ public class UsersInput
 
 
     private long deleted;
+
     private String password;
 
 
