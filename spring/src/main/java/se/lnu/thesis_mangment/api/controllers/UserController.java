@@ -22,13 +22,19 @@ public class UserController extends Controller
     @Autowired
     private UserServices userService;
 
-    @RequestMapping("/get")
-    public HashMap<String, Object> get(@Valid UsersInput input) throws IllegalAccessException
+    @RequestMapping("/login")
+    public HashMap<String, Object> login(@Valid UsersInput input) throws IllegalAccessException
     {
         if (!input.validatePassword())
         {
             throw new IllegalAccessException();
         }
+        return response(new ResponseArgument<>("user", userService.get(input)));
+    }
+
+    @RequestMapping("/get")
+    public HashMap<String, Object> get(@Valid UsersInput input) throws IllegalAccessException
+    {
         return response(new ResponseArgument<>("user", userService.get(input)));
     }
 

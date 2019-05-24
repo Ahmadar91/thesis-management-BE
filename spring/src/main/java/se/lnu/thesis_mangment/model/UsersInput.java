@@ -8,9 +8,10 @@ public class UsersInput
 
     @Size(max = 255)
     private String filterValue;
-
     // student as default
-    private long roleId = 1L;
+    private long roleId;
+
+
 
     private long deleted;
     private String password;
@@ -101,5 +102,15 @@ public class UsersInput
     public boolean validatePassword()
     {
         return password != null;
+    }
+
+    public long getDeleted()
+    {
+        return deleted;
+    }
+
+    public void setDeleted(long deleted)
+    {
+        this.deleted = deleted;
     }
 }

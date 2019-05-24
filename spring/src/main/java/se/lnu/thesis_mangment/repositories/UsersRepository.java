@@ -34,6 +34,12 @@ public class UsersRepository extends BaseItemsRepository<User>
         save(user);
     }
 
+    public void updateUserId(User user)
+    {
+        var stmt = "SELECT `id`, `role_id`, `first_name`, `last_name`, `username`, `password`, `email`, `created_at`, `updated_at`, `deleted` FROM `2dv603`.`users` WHERE ";
+        var s = String.format("UPDATE `2dv603`.`users` SET `role_id`='{0}' WHERE  `id`={1};", user.getRoleId(), user.getId());
+    }
+
     private class UsersSearchBuilder extends SearchBuilder
     {
         UsersSearchBuilder(UsersInput input)
