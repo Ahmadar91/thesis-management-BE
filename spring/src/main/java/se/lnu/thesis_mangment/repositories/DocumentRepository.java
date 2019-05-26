@@ -19,13 +19,6 @@ public class DocumentRepository extends BaseItemsRepository<Document>
         return selectAll(stmt, Document.class, searchBuilder.getParameterList());
     }
 
-//    public List<Document> getDocument(DocumentInput input)
-//    {
-//        var searchBuilder = new DocumentSearchBuilder(input);
-//        var stmt = "FROM Document AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
-//        return selectAll(stmt, Document.class, searchBuilder.getParameterList());
-//    }
-
     @Transactional
     public void add(Document document)
     {
@@ -50,43 +43,43 @@ public class DocumentRepository extends BaseItemsRepository<Document>
             {
                 if ((input.getId() > 0))
                 {
-                    add("and t.id = :id ", "id", input.getId());
+                    super.add("and t.id = :id ", "id", input.getId());
                 }
                 if ((input.getTitle() != null) && (!input.getTitle().isEmpty()))
                 {
-                    add("and t.title = :title ", "title", input.getTitle());
+                    super.add("and t.title = :title ", "title", input.getTitle());
                 }
 
                 if ((input.getAuthorId() > 0))
                 {
-                    add("and t.authorId = :authorId ", "authorId", input.getAuthorId());
+                    super.add("and t.authorId = :authorId ", "authorId", input.getAuthorId());
                 }
 
                 if ((input.getOpponentId() > 0))
                 {
-                    add("and t.opponentId = :opponentId ", "opponentId", input.getOpponentId());
+                    super.add("and t.opponentId = :opponentId ", "opponentId", input.getOpponentId());
                 }
                 if ((input.getSupervisorId() > 0))
                 {
-                    add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
+                    super.add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
                 }
                 if ((input.getReaderFeedbackId() > 0))
                 {
-                    add("and t.readerFeedbackId = :readerFeedbackId ", "readerFeedbackId", input.getReaderFeedbackId());
+                    super.add("and t.readerFeedbackId = :readerFeedbackId ", "readerFeedbackId", input.getReaderFeedbackId());
                 }
                 if ((input.getOpponentFeedbackId() > 0))
                 {
-                    add("and t.opponentFeedbackId = :opponentFeedbackId ", "opponentFeedbackId", input.getOpponentFeedbackId());
+                    super.add("and t.opponentFeedbackId = :opponentFeedbackId ", "opponentFeedbackId", input.getOpponentFeedbackId());
                 }
 
                 if ((input.getGradeNum() > 0))
                 {
-                    add("and t.gradeNum = :gradeNum ", "gradeNum", input.getGradeNum());
+                    super.add("and t.gradeNum = :gradeNum ", "gradeNum", input.getGradeNum());
                 }
 
                 if ((input.getGradePass() > 0))
                 {
-                    add("and t.opponentFeedback = :opponentFeedbackId ", "opponentFeedbackId", input.getOpponentFeedbackId());
+                    super.add("and t.opponentFeedback = :opponentFeedbackId ", "opponentFeedbackId", input.getOpponentFeedbackId());
                 }
             }
         }

@@ -72,24 +72,4 @@ public class DocumentServices
             throw new NotFoundException("The file doesn't exist! File name should be in the following form: 'document" + "Id'.pdf");
         }
     }
-
-//    public List<Long> delete(Long id)
-//    {
-//        repository.delete(list, Document.class);
-//        return list;
-//    }
-
-
-//    public Document create(Document item)
-//    {
-//        return repository.save(item);
-//    }
-
-//    @Transactional
-//    public void update(Document document, long id)
-//    {
-//        Document oldDocument = (Document) baseItemRepository.get(id, Document.class);
-//        repository.update(document);
-//
-//    }
 }

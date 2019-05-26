@@ -2,8 +2,8 @@ package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmation;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmationInput;
@@ -11,7 +11,7 @@ import se.lnu.thesis_mangment.services.SupervisorsConfirmationServices;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.HashMap;
+import java.util.Map;
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -23,9 +23,9 @@ public class SupervisorsConfirmationController extends Controller
     private SupervisorsConfirmationServices services;
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping(value = "/add")
     @Transactional
-    public HashMap<String, Object> add(@Valid SupervisorsConfirmationInput input)
+    public Map<String, Object> add(@Valid SupervisorsConfirmationInput input)
     {
 
         SupervisorsConfirmation supervisorsConfirmation = getSupervisorsConfirmationFromInput(input);

@@ -2,7 +2,6 @@ package se.lnu.thesis_mangment.repositories.base;
 
 
 import org.springframework.transaction.annotation.Transactional;
-import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.repositories.query.Parameter;
 
 import javax.persistence.EntityManager;
@@ -112,7 +111,7 @@ public class BaseRepository
     }
 
     @Transactional
-    public <T> T update1(T t)
+    public <T> T update(T t)
     {
         entityManager.merge(t);
         return t;

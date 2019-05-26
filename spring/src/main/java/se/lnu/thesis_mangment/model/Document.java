@@ -32,10 +32,6 @@ public class Document
     {
         this.supervisorFeedbackId = supervisorFeedbackId;
     }
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "author_id")
-//    private User author;
-
 
     public String getType()
     {
@@ -46,22 +42,6 @@ public class Document
     {
         this.type = type;
     }
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "opponent_id")
-//    private User opponent;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "supervisor_id")
-//    private User supervisor;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "reader_feedback_id")
-//    private Feedback readerFeedback;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "opponent_feedback_id")
-//    private Feedback opponentFeedback;
-
 
     public Long getId()
     {

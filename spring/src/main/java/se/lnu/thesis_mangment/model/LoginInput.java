@@ -1,9 +1,6 @@
 package se.lnu.thesis_mangment.model;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-public class LoginInput extends UsersInput
+public class LoginInput
 {
 
 
@@ -38,13 +35,11 @@ public class LoginInput extends UsersInput
         this.username = username;
     }
 
-    @Override
     public long getRoleId()
     {
         return roleId;
     }
 
-    @Override
     public void setRoleId(long roleId)
     {
         this.roleId = roleId;

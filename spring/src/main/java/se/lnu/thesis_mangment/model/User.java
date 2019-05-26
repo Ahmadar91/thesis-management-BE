@@ -6,9 +6,6 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User
 {
-    //  @ManyToOne(fetch = FetchType.LAZY, targetEntity = se.lnu.thesis_mangment.model.Role.class)
-    //  @JoinColumn(name = "role_id")
-    //   private Role role;
     private long roleId;
 
     @Id
@@ -22,12 +19,6 @@ public class User
     private String email = "";
     private String password = "";
     private Long deleted = 0L;
-
-    public User()
-    {
-
-    }
-
 
     public Long getId()
     {
@@ -110,18 +101,5 @@ public class User
     {
         this.roleId = roleId;
     }
-//    public Role getRole()
-//    {
-//        return role;
-//    }
-//
-//    public void setRole(Role role)
-//    {
-//        this.role = role;
-//    }
-//
-//    public void setRole(String role)
-//    {
-//        this.role.setRoleName(role);
-//    }
+
 }

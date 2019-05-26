@@ -3,14 +3,15 @@ package se.lnu.thesis_mangment.api.controllers;
 import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Controller
 {
 
 
-    protected HashMap<String, Object> response(ResponseArgument... args)
+    protected Map<String, Object> response(ResponseArgument... args)
     {
-        HashMap<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         for (ResponseArgument arg : args)
         {
             result.put(arg.getName(), arg.getObject());

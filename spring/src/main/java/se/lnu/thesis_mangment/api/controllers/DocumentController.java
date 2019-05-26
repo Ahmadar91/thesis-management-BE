@@ -14,8 +14,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -23,23 +23,24 @@ import java.util.List;
 @RequestMapping(value = "/api/document")
 public class DocumentController extends Controller
 {
+    private static final String DOCUMENT = "document";
     @Autowired
     private DocumentServices documentServices;
 
 
     @RequestMapping(value = "/get")
-    public HashMap<String, Object> get(@Valid DocumentInput input)
+    public Map<String, Object> get(@Valid DocumentInput input)
     {
-        return response(new ResponseArgument<>("document", documentServices.get(input)));
+        return response(new ResponseArgument<>(DOCUMENT, documentServices.get(input)));
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping(value = "/add")
     @Transactional
-    public HashMap<String, Object> add(@Valid DocumentInput input)
+    public Map<String, Object> add(@Valid DocumentInput input)
     {
         Document document = getDocumentFromInput(input);
         documentServices.add(document);
-        return response(new ResponseArgument<>("document", document));
+        return response(new ResponseArgument<>(DOCUMENT, document));
     }
 
     @PostMapping(value = "/upload")
@@ -48,7 +49,7 @@ public class DocumentController extends Controller
         documentServices.storeFile(file);
     }
 
-    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    @GetMapping(value = "/download")
     public Resource download(@Valid DocumentInput input) throws IOException, NotFoundException
     {
         String fileName = input.getId() + ".pdf";
@@ -56,14 +57,7 @@ public class DocumentController extends Controller
     }
 
 
-    //    @RequestMapping("/update/{id}")
-//    @Transactional
-//    public void update(@Valid DocumentInput input)
-//    {
-//        delete(input);
-//        add(input);
-//    }
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/update/{id}")
     @Modifying
     void setUserInfoById(@Valid DocumentInput input)
     {
@@ -72,7 +66,6 @@ public class DocumentController extends Controller
         Document document = getById(dInput);
 
         documentServices.add(getDocumentFromInput(input, document));
-        System.out.println("hello");
     }
 
     public Document getById(@Valid DocumentInput input)
@@ -82,13 +75,13 @@ public class DocumentController extends Controller
 
     @RequestMapping("/remove/{id}")
     @Transactional
-    public HashMap<String, Object> delete(@Valid DocumentInput input)
+    public Map<String, Object> delete(@Valid DocumentInput input)
     {
         Document newDocument = getDocumentFromInput(input);
         List<Long> list = new ArrayList<>();
         list.add(input.getId());
         documentServices.delete(list);
-        return response(new ResponseArgument<>("document", newDocument));
+        return response(new ResponseArgument<>(DOCUMENT, newDocument));
     }
 
     private Document getDocumentFromInput(DocumentInput input)
@@ -117,13 +110,7 @@ public class DocumentController extends Controller
         document.setSupervisorId(input.getSupervisorId());
         document.setGradePass(input.getGradePass());
         return document;
-        /*
 
-
-    private long deleted;
-    private int gradeNum;
-    private int gradePass;
-         */
     }
 
 }

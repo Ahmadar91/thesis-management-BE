@@ -19,19 +19,19 @@ public class TaskController
     }
 
     // @RequestMapping(value = {"","/", "/home"}, method = RequestMethod.GET)
-    @RequestMapping(value = {"/submit"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/submit"})
     public void submit(@RequestBody Document task)
     {
         documentsList.add(task);
     }
 
-    @RequestMapping(value = {"/delete"}, method = RequestMethod.DELETE)
+    @DeleteMapping(value = {"/delete"})
     public void delete(@RequestBody Document task)
     {
         documentsList.remove(task);
     }
 
-    @RequestMapping(value = {"/edit"}, method = RequestMethod.PUT)
+    @PutMapping(value = {"/edit"})
     public void edit(Document oldTask, Document newTask)
     {
         documentsList.set(documentsList.indexOf(oldTask), newTask);

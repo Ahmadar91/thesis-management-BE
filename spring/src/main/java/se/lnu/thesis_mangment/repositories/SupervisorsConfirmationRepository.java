@@ -34,25 +34,25 @@ public class SupervisorsConfirmationRepository extends BaseItemsRepository<Super
             {
                 if ((input.getId() > 0))
                 {
-                    add("and t.id = :id ", "id", input.getId());
+                    super.add("and t.id = :id ", "id", input.getId());
                 }
                 if ((input.getSupervisorId() > 0))
                 {
-                    add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
+                    super.add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
                 }
 
                 if ((input.getStudentId() > 0))
                 {
-                    add("and t.studentId = :studentId ", "studentId", input.getStudentId());
+                    super.add("and t.studentId = :studentId ", "studentId", input.getStudentId());
                 }
                 // can be equals to zero, in order to know the students who got rejected
                 if ((input.getConfirmed() > 0))
                 {
-                    add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
+                    super.add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
                 }
                 if ((input.getProjectPlanId() > 0))
                 {
-                    add("and t.projectPlanId = :projectPlanId ", "projectPlanId", input.getProjectPlanId());
+                    super.add("and t.projectPlanId = :projectPlanId ", "projectPlanId", input.getProjectPlanId());
                 }
             }
         }
