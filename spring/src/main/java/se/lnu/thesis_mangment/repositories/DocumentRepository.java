@@ -3,8 +3,6 @@ package se.lnu.thesis_mangment.repositories;
 import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.Document;
 import se.lnu.thesis_mangment.model.DocumentInput;
-import se.lnu.thesis_mangment.model.User;
-import se.lnu.thesis_mangment.repositories.base.BaseItemRepository;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
@@ -21,11 +19,19 @@ public class DocumentRepository extends BaseItemsRepository<Document>
         return selectAll(stmt, Document.class, searchBuilder.getParameterList());
     }
 
+//    public List<Document> getDocument(DocumentInput input)
+//    {
+//        var searchBuilder = new DocumentSearchBuilder(input);
+//        var stmt = "FROM Document AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+//        return selectAll(stmt, Document.class, searchBuilder.getParameterList());
+//    }
+
     @Transactional
     public void add(Document document)
     {
         save(document);
     }
+
 
     @Transactional
     public void update(Document document)

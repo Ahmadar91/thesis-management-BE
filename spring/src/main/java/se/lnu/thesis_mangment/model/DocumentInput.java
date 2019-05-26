@@ -4,26 +4,18 @@ package se.lnu.thesis_mangment.model;
 public class DocumentInput
 {
 
-
     private long id;
-
-    private long authorId;
-
-    private long supervisorId;
-
-    private long readerFeedbackId;
-
-    private long opponentFeedbackId;
-
-    private int gradeNum;
-
-    private int gradePass;
-
     private String title;
-
-
+    private String type;
+    private long supervisorFeedbackId;
+    private long authorId;
     private long opponentId;
-
+    private long supervisorId;
+    private long readerFeedbackId;
+    private long opponentFeedbackId;
+    private long deleted;
+    private int gradeNum;
+    private int gradePass;
 
     public long getId()
     {
@@ -45,6 +37,25 @@ public class DocumentInput
         this.authorId = authorId;
     }
 
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
+    }
+
+    public long getSupervisorFeedbackId()
+    {
+        return supervisorFeedbackId;
+    }
+
+    public void setSupervisorFeedbackId(long supervisorFeedbackId)
+    {
+        this.supervisorFeedbackId = supervisorFeedbackId;
+    }
 
     public long getSupervisorId()
     {
@@ -126,5 +137,15 @@ public class DocumentInput
     public void setOpponentId(long opponentId)
     {
         this.opponentId = opponentId;
+    }
+
+    public long getDeleted()
+    {
+        return deleted;
+    }
+
+    public void setDeleted(long deleted)
+    {
+        this.deleted = deleted;
     }
 }

@@ -12,19 +12,16 @@ public class Document
     private Long id;
     //  @Column(name = "title")
     private String title;
-
     private String type;
     private long supervisorFeedbackId;
-
-    public String getType()
-    {
-        return type;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
-    }
+    private long authorId;
+    private long opponentId;
+    private long supervisorId;
+    private long readerFeedbackId;
+    private long opponentFeedbackId;
+    private long deleted;
+    private int gradeNum;
+    private int gradePass;
 
     public long getSupervisorFeedbackId()
     {
@@ -39,15 +36,16 @@ public class Document
 //    @JoinColumn(name = "author_id")
 //    private User author;
 
-    private long authorId;
-    private long opponentId;
-    private long supervisorId;
-    private long readerFeedbackId;
-    private long opponentFeedbackId;
 
-    private long deleted;
+    public String getType()
+    {
+        return type;
+    }
 
-
+    public void setType(String type)
+    {
+        this.type = type;
+    }
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "opponent_id")
 //    private User opponent;
@@ -64,10 +62,6 @@ public class Document
 //    @JoinColumn(name = "opponent_feedback_id")
 //    private Feedback opponentFeedback;
 
-    //   @Column(name = "grade_num")
-    private int gradeNum;
-    //  @Column(name = "passed")
-    private int gradePass;
 
     public Long getId()
     {

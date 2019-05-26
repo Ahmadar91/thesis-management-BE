@@ -1,7 +1,9 @@
 package se.lnu.thesis_mangment.api.controllers;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.lnu.thesis_mangment.model.Document;
@@ -11,7 +13,9 @@ import se.lnu.thesis_mangment.services.DocumentServices;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -45,33 +49,47 @@ public class DocumentController extends Controller
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public Resource download(@Valid DocumentInput input) throws IOException
+    public Resource download(@Valid DocumentInput input) throws IOException, NotFoundException
     {
         String fileName = input.getId() + ".pdf";
         return documentServices.downloadFile(fileName);
-
     }
 
 
-    @RequestMapping("/{id}")
+    //    @RequestMapping("/update/{id}")
+//    @Transactional
+//    public void update(@Valid DocumentInput input)
+//    {
+//        delete(input);
+//        add(input);
+//    }
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    @Modifying
+    void setUserInfoById(@Valid DocumentInput input)
+    {
+        DocumentInput dInput = new DocumentInput();
+        dInput.setId(input.getId());
+        Document document = getById(dInput);
+
+        documentServices.add(getDocumentFromInput(input, document));
+        System.out.println("hello");
+    }
+
+    public Document getById(@Valid DocumentInput input)
+    {
+        return documentServices.getDocument(input);
+    }
+
+    @RequestMapping("/remove/{id}")
     @Transactional
-    public HashMap<String, Object> update(@Valid DocumentInput input)
+    public HashMap<String, Object> delete(@Valid DocumentInput input)
     {
         Document newDocument = getDocumentFromInput(input);
-        documentServices.update(newDocument, input.getId());
+        List<Long> list = new ArrayList<>();
+        list.add(input.getId());
+        documentServices.delete(list);
         return response(new ResponseArgument<>("document", newDocument));
     }
-
-    @RequestMapping("/remove")
-    @Transactional
-    public void delete(@Valid DocumentInput input)
-    {
-        Document newDocument = getDocumentFromInput(input);
-        //  documentServices.update(newDocument);
-        // return response(new ResponseArgument<>("Document is", newDocument));
-    }
-
-    //@RequestMapping("/upload")
 
     private Document getDocumentFromInput(DocumentInput input)
     {
@@ -84,22 +102,28 @@ public class DocumentController extends Controller
         return document;
     }
 
-//    @RequestMapping("/signUp/{id}")
-//    public void signUp(@RequestBody String firstName, @RequestBody String lastName, @RequestBody String email, @RequestBody String password)
-//    {
-//
-//    }
-//
-//    @RequestMapping("/signIn")
-//    public void signIn()
-//    {
-//
-//    }
-//
-//    @RequestMapping("/signOut")
-//    public void signOut()
-//    {
-//
-//    }
+    private Document getDocumentFromInput(DocumentInput input, Document document)
+    {
+        document.setId(input.getId());
+        document.setTitle(input.getTitle());
+        document.setType(input.getType());
+        document.setSupervisorFeedbackId(input.getSupervisorFeedbackId());
+        document.setAuthorId(input.getAuthorId());
+        document.setOpponentFeedbackId(input.getOpponentFeedbackId());
+        document.setReaderFeedbackId(input.getReaderFeedbackId());
+        document.setDeleted(input.getDeleted());
+        document.setGradeNum(input.getGradeNum());
+        document.setOpponentId(input.getOpponentId());
+        document.setSupervisorId(input.getSupervisorId());
+        document.setGradePass(input.getGradePass());
+        return document;
+        /*
+
+
+    private long deleted;
+    private int gradeNum;
+    private int gradePass;
+         */
+    }
 
 }
