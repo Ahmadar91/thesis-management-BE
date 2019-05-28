@@ -9,9 +9,8 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    //  @Column(name = "title")
     private String title;
-    private int type;
+    private long type;
     private long supervisorFeedbackId;
     private long authorId;
     private long opponentId;
@@ -30,11 +29,11 @@ public class Document {
         this.supervisorFeedbackId = supervisorFeedbackId;
     }
 
-    public int getType() {
+    public long getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(long type) {
         this.type = type;
     }
 

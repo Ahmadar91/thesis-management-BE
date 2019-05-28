@@ -6,7 +6,7 @@ public class DocumentInput
 
     private long id;
     private String title;
-    private int type;
+    private long type;
     private long supervisorFeedbackId;
     private long authorId;
     private long opponentId;
@@ -37,12 +37,12 @@ public class DocumentInput
         this.authorId = authorId;
     }
 
-    public int getType()
+    public long getType()
     {
         return type;
     }
 
-    public void setType(int type)
+    public void setType(long type)
     {
         this.type = type;
     }
