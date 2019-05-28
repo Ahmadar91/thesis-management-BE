@@ -1,79 +1,41 @@
 package se.lnu.thesis_mangment.model;
 
-import javax.persistence.*;
+public class SupervisorsConfirmationInput {
 
-@Entity
-@Table(name = "supervisorsConfirmation")
-public class SupervisorsConfirmationInput
-{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
-    private Long id;
     private long supervisorId;
     private long studentId;
     private int confirmed;
     private int projectPlanId;
-    private long deleted;
 
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public long getSupervisorId()
-    {
+    public long getSupervisorId() {
         return supervisorId;
     }
 
-    public void setSupervisorId(long supervisorId)
-    {
+    public void setSupervisorId(long supervisorId) {
         this.supervisorId = supervisorId;
     }
 
-    public long getStudentId()
-    {
+    public long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(long studentId)
-    {
+    public void setStudentId(long studentId) {
         this.studentId = studentId;
     }
 
-    public int getConfirmed()
-    {
+    public int getConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(int confirmed)
-    {
+    public void setConfirmed(int confirmed) {
         this.confirmed = confirmed;
     }
 
-    public int getProjectPlanId()
-    {
+    public int getProjectPlanId() {
         return projectPlanId;
     }
 
-    public void setProjectPlanId(int projectPlanId)
-    {
+    public void setProjectPlanId(int projectPlanId) {
         this.projectPlanId = projectPlanId;
-    }
-
-    public long getDeleted()
-    {
-        return deleted;
-    }
-
-    public void setDeleted(long deleted)
-    {
-        this.deleted = deleted;
     }
 }

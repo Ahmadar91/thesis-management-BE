@@ -44,8 +44,6 @@ public class SupervisorsConfirmationController extends Controller
         supervisorsConfirmation.setProjectPlanId(input.getProjectPlanId());
         supervisorsConfirmation.setStudentId(input.getStudentId());
         supervisorsConfirmation.setSupervisorId(input.getSupervisorId());
-        supervisorsConfirmation.setId(input.getId());
-        supervisorsConfirmation.setDeleted(input.getDeleted());
         return supervisorsConfirmation;
     }
 

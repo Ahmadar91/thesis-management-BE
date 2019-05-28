@@ -91,6 +91,7 @@ public class DocumentController extends Controller
         document.setAuthorId(input.getAuthorId());
         document.setGradeNum(input.getGradeNum());
         document.setOpponentId(input.getOpponentId());
+        document.setType(input.getType());
         document.setOpponentFeedbackId(input.getOpponentFeedbackId());
         return document;
     }

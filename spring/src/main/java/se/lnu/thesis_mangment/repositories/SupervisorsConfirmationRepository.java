@@ -32,10 +32,6 @@ public class SupervisorsConfirmationRepository extends BaseItemsRepository<Super
         {
             if (input != null)
             {
-                if ((input.getId() > 0))
-                {
-                    super.add("and t.id = :id ", "id", input.getId());
-                }
                 if ((input.getSupervisorId() > 0))
                 {
                     super.add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
