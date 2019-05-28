@@ -45,6 +45,10 @@ public class DocumentRepository extends BaseItemsRepository<Document>
                 {
                     super.add("and t.id = :id ", "id", input.getId());
                 }
+                if ((input.getType() > 0))
+                {
+                    super.add("and t.type = :type ", "type", input.getId());
+                }
                 if ((input.getTitle() != null) && (!input.getTitle().isEmpty()))
                 {
                     super.add("and t.title = :title ", "title", input.getTitle());
