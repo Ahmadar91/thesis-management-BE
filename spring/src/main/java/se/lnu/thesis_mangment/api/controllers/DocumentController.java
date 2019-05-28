@@ -28,7 +28,7 @@ public class DocumentController extends Controller
     private DocumentServices documentServices;
 
 
-    @RequestMapping(value = "/get")
+    @GetMapping(value = "/get")
     public Map<String, Object> get(@Valid DocumentInput input)
     {
         return response(new ResponseArgument<>(DOCUMENT, documentServices.get(input)));

@@ -18,6 +18,8 @@ import java.util.Map;
 @RequestMapping(value = "/api/user")
 public class UserController extends Controller
 {
+    private static final String USER = "user";
+
     @Autowired
     private UserServices userService;
 
@@ -28,13 +30,13 @@ public class UserController extends Controller
         {
             throw new IllegalAccessException();
         }
-        return response(new ResponseArgument<>("user", userService.get(input)));
+        return response(new ResponseArgument<>(USER, userService.get(input)));
     }
 
     @RequestMapping("/get")
     public Map<String, Object> get(@Valid UsersInput input)
     {
-        return response(new ResponseArgument<>("user", userService.get(input)));
+        return response(new ResponseArgument<>(USER, userService.get(input)));
     }
 
     @PostMapping(value = "/add")
@@ -50,6 +52,8 @@ public class UserController extends Controller
     {
         User user = new User();
         user.setUsername(input.getUsername());
+        user.setFirstName(input.getFirstName());
+        user.setLastName(input.getLastName());
         user.setPassword(input.getPassword());
         user.setRoleId(input.getRoleId());
         user.setEmail(input.getEmail());

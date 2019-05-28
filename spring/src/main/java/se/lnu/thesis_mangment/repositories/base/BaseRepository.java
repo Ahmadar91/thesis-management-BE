@@ -67,9 +67,6 @@ public class BaseRepository
         return t;
     }
 
-
-
-
     public <T> List<T> saveAll(List<T> list)
     {
         int i = 0;

@@ -1,10 +1,7 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmation;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmationInput;
 import se.lnu.thesis_mangment.services.SupervisorsConfirmationServices;
@@ -21,7 +18,13 @@ public class SupervisorsConfirmationController extends Controller
 {
     @Autowired
     private SupervisorsConfirmationServices services;
+    private static final String CONFIRMATION = "confirmation";
 
+    @GetMapping(value = "/get")
+    public Map<String, Object> get(@Valid SupervisorsConfirmationInput input)
+    {
+        return response(new ResponseArgument<>(CONFIRMATION, services.get(input)));
+    }
 
     @PostMapping(value = "/add")
     @Transactional
@@ -30,7 +33,7 @@ public class SupervisorsConfirmationController extends Controller
 
         SupervisorsConfirmation supervisorsConfirmation = getSupervisorsConfirmationFromInput(input);
         services.add(supervisorsConfirmation);
-        return response(new ResponseArgument<>("document", supervisorsConfirmation));
+        return response(new ResponseArgument<>(CONFIRMATION, supervisorsConfirmation));
     }
 
     // need improve

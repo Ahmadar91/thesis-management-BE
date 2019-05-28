@@ -12,7 +12,6 @@ public class UsersInput
     private long roleId;
 
 
-
     private long deleted;
 
     private String password;
@@ -21,6 +20,9 @@ public class UsersInput
     @Size(max = 255)
     private String firstName;
 
+
+    @Size(max = 255)
+    private String lastName;
     @Size(max = 255)
     private String username;
 
@@ -113,5 +115,15 @@ public class UsersInput
     public void setDeleted(long deleted)
     {
         this.deleted = deleted;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
     }
 }

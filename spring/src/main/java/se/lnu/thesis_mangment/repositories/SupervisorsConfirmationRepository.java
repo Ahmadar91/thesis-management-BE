@@ -15,7 +15,7 @@ public class SupervisorsConfirmationRepository extends BaseItemsRepository<Super
     public List<SupervisorsConfirmation> get(SupervisorsConfirmationInput input)
     {
         var searchBuilder = new SupervisorConfirmationBuilder(input);
-        var stmt = "FROM Document AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        var stmt = "FROM SupervisorsConfirmation AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         return selectAll(stmt, SupervisorsConfirmation.class, searchBuilder.getParameterList());
     }
 
