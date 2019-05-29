@@ -18,10 +18,6 @@ public class DocumentServices {
         return repository.get(input);
     }
 
-    public Document getDocument(DocumentInput input) {
-        return repository.get(input).get(0);
-    }
-
     public Long count() {
         return repository.count(Document.class);
     }
@@ -34,5 +30,9 @@ public class DocumentServices {
     public List<Long> delete(List<Long> list) {
         repository.delete(list, Document.class);
         return list;
+    }
+
+    public void update(Document item) {
+        repository.update(item);
     }
 }

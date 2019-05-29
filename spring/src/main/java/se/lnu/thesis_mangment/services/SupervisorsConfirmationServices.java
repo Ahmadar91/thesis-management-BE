@@ -36,4 +36,8 @@ public class SupervisorsConfirmationServices
         repository.delete(list, SupervisorsConfirmation.class);
         return list;
     }
+
+    public void update(SupervisorsConfirmation item) {
+        repository.update(item);
+    }
 }

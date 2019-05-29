@@ -2,6 +2,7 @@ package se.lnu.thesis_mangment.model;
 
 public class SupervisorsConfirmationInput {
 
+    private long id;
     private long supervisorId;
     private long studentId;
     private int confirmed;
@@ -37,5 +38,13 @@ public class SupervisorsConfirmationInput {
 
     public void setProjectPlanId(int projectPlanId) {
         this.projectPlanId = projectPlanId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

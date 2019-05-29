@@ -2,12 +2,14 @@ package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmation;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmationInput;
 import se.lnu.thesis_mangment.services.SupervisorsConfirmationServices;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 
@@ -36,6 +38,27 @@ public class SupervisorsConfirmationController extends Controller
         return response(new ResponseArgument<>(CONFIRMATION, supervisorsConfirmation));
     }
 
+    @PostMapping(value = "/update/{id}")
+    public Map<String, Object> updateConfirmation(@Valid SupervisorsConfirmationInput input) {
+        SupervisorsConfirmationInput dInput = new SupervisorsConfirmationInput();
+        dInput.setId(input.getId());
+        SupervisorsConfirmation supervisorsConfirmation = getById(dInput);
+
+
+        supervisorsConfirmation.setConfirmed(input.getConfirmed());
+        services.update(supervisorsConfirmation);
+        return response(new ResponseArgument<>(CONFIRMATION, supervisorsConfirmation));
+    }
+
+    public SupervisorsConfirmation getById(@Valid SupervisorsConfirmationInput input) {
+        List<SupervisorsConfirmation> list = services.get(input);
+        if (list.isEmpty()) {
+            throw new ResourceNotFoundException("document not found");
+        }
+        return list.get(0);
+    }
+
+
     // need improve
     private SupervisorsConfirmation getSupervisorsConfirmationFromInput(SupervisorsConfirmationInput input)
     {
@@ -46,5 +69,7 @@ public class SupervisorsConfirmationController extends Controller
         supervisorsConfirmation.setSupervisorId(input.getSupervisorId());
         return supervisorsConfirmation;
     }
+
+
 
 }

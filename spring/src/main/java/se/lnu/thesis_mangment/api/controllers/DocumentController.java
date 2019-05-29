@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
+import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.Document;
 import se.lnu.thesis_mangment.model.DocumentInput;
 import se.lnu.thesis_mangment.services.DocumentServices;
@@ -61,11 +62,16 @@ public class DocumentController extends Controller {
         dInput.setId(input.getId());
         Document document = getById(dInput);
 
-        documentServices.add(getDocumentFromInput(input, document));
+
+        updateDocument(document, input);
     }
 
     public Document getById(@Valid DocumentInput input) {
-        return documentServices.getDocument(input);
+        List<Document> documents = documentServices.get(input);
+        if (documents.isEmpty()) {
+            throw new ResourceNotFoundException("document not found");
+        }
+        return documents.get(0);
     }
 
     @RequestMapping("/remove/{id}")
@@ -104,6 +110,13 @@ public class DocumentController extends Controller {
         document.setGradePass(input.getGradePass());
         return document;
 
+    }
+
+    private void updateDocument(Document document, DocumentInput input) {
+        if (input.getAuthorId() != 0) {
+            document.setAuthorId(input.getAuthorId());
+        }
+        documentServices.update(document);
     }
 
 }
