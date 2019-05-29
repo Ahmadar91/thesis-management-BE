@@ -116,6 +116,12 @@ public class DocumentController extends Controller {
         if (input.getAuthorId() != 0) {
             document.setAuthorId(input.getAuthorId());
         }
+        if (input.getGradeNum() >= 0) {
+            document.setGradeNum(input.getGradeNum());
+        }
+        if (input.getGradePass() >= 0) {
+            document.setGradePass(input.getGradePass());
+        }
         documentServices.update(document);
     }
 
