@@ -1,9 +1,9 @@
 package se.lnu.thesis_mangment.model;
 
 
-public class DocumentInput
-{
+import org.springframework.web.multipart.MultipartFile;
 
+public class DocumentInput {
     private long id;
     private String title;
     private long type;
@@ -16,136 +16,121 @@ public class DocumentInput
     private long deleted;
     private int gradeNum;
     private int gradePass;
+    private MultipartFile file;
 
-    public long getId()
-    {
+    public long getId() {
         return id;
     }
 
-    public void setId(long id)
-    {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public long getAuthorId()
-    {
+    public long getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(long authorId)
-    {
+    public void setAuthorId(long authorId) {
         this.authorId = authorId;
     }
 
-    public long getType()
-    {
+    public long getType() {
         return type;
     }
 
-    public void setType(long type)
-    {
+    public void setType(long type) {
         this.type = type;
     }
 
-    public long getSupervisorFeedbackId()
-    {
+    public long getSupervisorFeedbackId() {
         return supervisorFeedbackId;
     }
 
-    public void setSupervisorFeedbackId(long supervisorFeedbackId)
-    {
+    public void setSupervisorFeedbackId(long supervisorFeedbackId) {
         this.supervisorFeedbackId = supervisorFeedbackId;
     }
 
-    public long getSupervisorId()
-    {
+    public long getSupervisorId() {
         return supervisorId;
     }
 
 
-    public void setSupervisorId(long supervisorId)
-    {
+    public void setSupervisorId(long supervisorId) {
         this.supervisorId = supervisorId;
     }
 
 
-    public long getReaderFeedbackId()
-    {
+    public long getReaderFeedbackId() {
         return readerFeedbackId;
     }
 
 
-    public void setReaderFeedbackId(long readerFeedbackId)
-    {
+    public void setReaderFeedbackId(long readerFeedbackId) {
         this.readerFeedbackId = readerFeedbackId;
     }
 
-    public long getOpponentFeedbackId()
-    {
+    public long getOpponentFeedbackId() {
         return opponentFeedbackId;
     }
 
 
-    public void setOpponentFeedbackId(long opponentFeedbackId)
-    {
+    public void setOpponentFeedbackId(long opponentFeedbackId) {
         this.opponentFeedbackId = opponentFeedbackId;
     }
 
 
-    public int getGradeNum()
-    {
+    public int getGradeNum() {
         return gradeNum;
     }
 
 
-    public void setGradeNum(int gradeNum)
-    {
+    public void setGradeNum(int gradeNum) {
         this.gradeNum = gradeNum;
     }
 
 
-    public int getGradePass()
-    {
+    public int getGradePass() {
         return gradePass;
     }
 
 
-    public void setGradePass(int gradePass)
-    {
+    public void setGradePass(int gradePass) {
         this.gradePass = gradePass;
     }
 
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
 
-    public long getOpponentId()
-    {
+    public long getOpponentId() {
         return opponentId;
     }
 
 
-    public void setOpponentId(long opponentId)
-    {
+    public void setOpponentId(long opponentId) {
         this.opponentId = opponentId;
     }
 
-    public long getDeleted()
-    {
+    public long getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(long deleted)
-    {
+    public void setDeleted(long deleted) {
         this.deleted = deleted;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 }

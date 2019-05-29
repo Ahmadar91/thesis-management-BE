@@ -3,12 +3,11 @@ package se.lnu.thesis_mangment.api.controllers;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import se.lnu.thesis_mangment.model.Document;
 import se.lnu.thesis_mangment.model.DocumentInput;
 import se.lnu.thesis_mangment.services.DocumentServices;
+import se.lnu.thesis_mangment.services.FileService;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -17,49 +16,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
+
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/document")
-public class DocumentController extends Controller
-{
+public class DocumentController extends Controller {
     private static final String DOCUMENT = "document";
     @Autowired
     private DocumentServices documentServices;
 
+    @Autowired
+    private FileService fileService;
+
 
     @GetMapping(value = "/get")
-    public Map<String, Object> get(@Valid DocumentInput input)
-    {
+    public Map<String, Object> get(@Valid DocumentInput input) {
         return response(new ResponseArgument<>(DOCUMENT, documentServices.get(input)));
     }
 
     @PostMapping(value = "/add")
     @Transactional
-    public Map<String, Object> add(@Valid DocumentInput input)
-    {
+    public Map<String, Object> add(@Valid DocumentInput input) throws IOException {
         Document document = getDocumentFromInput(input);
         documentServices.add(document);
+
+        // Save the file
+        fileService.save(input.getFile(), document.getId().toString() + ".pdf");
+
         return response(new ResponseArgument<>(DOCUMENT, document));
     }
 
-    @PostMapping(value = "/upload")
-    public void handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException
-    {
-        documentServices.storeFile(file);
-    }
 
-    @GetMapping(value = "/download")
-    public Resource download(@Valid DocumentInput input) throws IOException, NotFoundException
-    {
-        String fileName = input.getId() + ".pdf";
-        return documentServices.downloadFile(fileName);
+    @GetMapping(value = "/download", produces = APPLICATION_PDF_VALUE)
+    public Resource download(@Valid DocumentInput input) throws IOException, NotFoundException {
+        return fileService.get(input.getId() + ".pdf");
     }
 
 
     @PostMapping(value = "/update/{id}")
-    public void updateDocument(@Valid DocumentInput input)
-    {
+    public void updateDocument(@Valid DocumentInput input) {
         DocumentInput dInput = new DocumentInput();
         dInput.setId(input.getId());
         Document document = getById(dInput);
@@ -67,15 +64,13 @@ public class DocumentController extends Controller
         documentServices.add(getDocumentFromInput(input, document));
     }
 
-    public Document getById(@Valid DocumentInput input)
-    {
+    public Document getById(@Valid DocumentInput input) {
         return documentServices.getDocument(input);
     }
 
     @RequestMapping("/remove/{id}")
     @Transactional
-    public Map<String, Object> delete(@Valid DocumentInput input)
-    {
+    public Map<String, Object> delete(@Valid DocumentInput input) {
         Document newDocument = getDocumentFromInput(input);
         List<Long> list = new ArrayList<>();
         list.add(input.getId());
@@ -83,8 +78,7 @@ public class DocumentController extends Controller
         return response(new ResponseArgument<>(DOCUMENT, newDocument));
     }
 
-    private Document getDocumentFromInput(DocumentInput input)
-    {
+    private Document getDocumentFromInput(DocumentInput input) {
         Document document = new Document();
         document.setTitle(input.getTitle());
         document.setAuthorId(input.getAuthorId());
@@ -95,8 +89,7 @@ public class DocumentController extends Controller
         return document;
     }
 
-    private Document getDocumentFromInput(DocumentInput input, Document document)
-    {
+    private Document getDocumentFromInput(DocumentInput input, Document document) {
         document.setId(input.getId());
         document.setTitle(input.getTitle());
         document.setType(input.getType());
