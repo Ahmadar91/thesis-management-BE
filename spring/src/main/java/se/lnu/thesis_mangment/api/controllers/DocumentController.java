@@ -58,8 +58,7 @@ public class DocumentController extends Controller
 
 
     @PostMapping(value = "/update/{id}")
-    @Modifying
-    void setUserInfoById(@Valid DocumentInput input)
+    public void updateDocument(@Valid DocumentInput input)
     {
         DocumentInput dInput = new DocumentInput();
         dInput.setId(input.getId());
