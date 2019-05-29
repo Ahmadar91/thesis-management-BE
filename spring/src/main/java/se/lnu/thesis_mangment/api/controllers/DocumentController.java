@@ -57,13 +57,15 @@ public class DocumentController extends Controller {
 
 
     @PostMapping(value = "/update/{id}")
-    public void updateDocument(@Valid DocumentInput input) {
+    public Map<String, Object> updateDocument(@Valid DocumentInput input) {
         DocumentInput dInput = new DocumentInput();
         dInput.setId(input.getId());
         Document document = getById(dInput);
 
 
         updateDocument(document, input);
+        return response(new ResponseArgument<>(DOCUMENT, document));
+
     }
 
     public Document getById(@Valid DocumentInput input) {
