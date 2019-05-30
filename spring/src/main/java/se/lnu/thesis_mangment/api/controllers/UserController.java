@@ -24,7 +24,6 @@ public class UserController extends Controller
 
     @Autowired
     private UserServices userService;
-    private static final String CONFIRMATION = "confirmation";
     @RequestMapping("/login")
     public Map<String, Object> login(@Valid UsersInput input) throws IllegalAccessException
     {
@@ -76,7 +75,7 @@ public class UserController extends Controller
         user.setEmail((input.getEmail()));
         user.setRoleId((input.getRoleId()));
         userService.update(user);
-        return response(new ResponseArgument<>(CONFIRMATION, user));
+        return response(new ResponseArgument<>(USER, user));
     }
 
     public User getById(UsersInput input) {
