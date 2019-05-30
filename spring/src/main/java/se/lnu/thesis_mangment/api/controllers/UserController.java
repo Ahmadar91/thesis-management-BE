@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.model.UsersInput;
 import se.lnu.thesis_mangment.services.UserServices;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,7 +24,7 @@ public class UserController extends Controller
 
     @Autowired
     private UserServices userService;
-
+    private static final String CONFIRMATION = "confirmation";
     @RequestMapping("/login")
     public Map<String, Object> login(@Valid UsersInput input) throws IllegalAccessException
     {
@@ -58,6 +60,30 @@ public class UserController extends Controller
         user.setRoleId(input.getRoleId());
         user.setEmail(input.getEmail());
         user.setLastName(input.getEmail());
+        return user;
+    }
+
+
+
+    @PostMapping(value = "/update/{id}")
+    public Map<String, Object> updateConfirmation(@Valid UsersInput input) {
+        UsersInput dInput = new UsersInput();
+        dInput.setId(input.getId());
+        User user = getById(dInput);
+        user.setFirstName(input.getFirstName());
+        user.setLastName(input.getLastName());
+        user.setUsername((input.getUsername()));
+        user.setEmail((input.getEmail()));
+        user.setRoleId((input.getRoleId()));
+        userService.update(user);
+        return response(new ResponseArgument<>(CONFIRMATION, user));
+    }
+
+    public User getById(UsersInput input) {
+        User user =  userService.get(input);
+        if (user == null) {
+            throw new ResourceNotFoundException("user not found");
+        }
         return user;
     }
 

@@ -24,4 +24,10 @@ public class UserServices
     {
         repository.add(user);
     }
+
+
+    public void update(User item) {
+        repository.update(item);
+    }
+
 }
