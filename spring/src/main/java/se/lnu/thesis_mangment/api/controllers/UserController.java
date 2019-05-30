@@ -12,7 +12,7 @@ import se.lnu.thesis_mangment.services.UserServices;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.List;
+
 import java.util.Map;
 
 @RestController
