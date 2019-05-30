@@ -53,7 +53,7 @@ public class SupervisorsConfirmationController extends Controller
     public SupervisorsConfirmation getById(@Valid SupervisorsConfirmationInput input) {
         List<SupervisorsConfirmation> list = services.get(input);
         if (list.isEmpty()) {
-            throw new ResourceNotFoundException("document not found");
+            throw new ResourceNotFoundException("confirmation not found");
         }
         return list.get(0);
     }
