@@ -69,6 +69,10 @@ public class UsersRepository extends BaseItemsRepository<User>
                 {
                     super.add("and t.email = :email ", "email", input.getEmail());
                 }
+                if ((input.getSupervisorId() != null) && (input.getSupervisorId() >= 0))
+                {
+                    super.add("and t.supervisorId = :supervisorId ", "supervisorId", input.getSupervisorId());
+                }
             }
         }
     }

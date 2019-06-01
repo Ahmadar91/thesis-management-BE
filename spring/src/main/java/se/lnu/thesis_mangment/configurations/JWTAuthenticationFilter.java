@@ -54,6 +54,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             }
         }
 
+
         return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>()));
     }
 
@@ -61,33 +62,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException
     {
 
-        String token = JWT.create().withSubject(((User) auth.getPrincipal()).getUsername()).withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).sign(HMAC512(SECRET.getBytes()));
+        var username = ((User) auth.getPrincipal()).getUsername();
+        String token = JWT.create().withSubject(username).withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-    }
 
-    class Login
-    {
-        private String username;
-        private String password;
-
-        public String getUsername()
-        {
-            return username;
-        }
-
-        public void setUsername(String username)
-        {
-            this.username = username;
-        }
-
-        public String getPassword()
-        {
-            return password;
-        }
-
-        public void setPassword(String password)
-        {
-            this.password = password;
-        }
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+        var writer = res.getWriter();
+        writer.print("{result: 200, token: '" + token + "', username: '" + username + "'}");
+        writer.flush();
     }
 }
