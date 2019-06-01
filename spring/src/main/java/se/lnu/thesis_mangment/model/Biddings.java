@@ -8,13 +8,13 @@ public class Biddings
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "reader_id")
-    private long readerId;
+    private Long readerId;
     @Column(name = "report_id")
-    private long reportId;
+    private Long reportId;
     @Column(name = "bidding_number")
-    private long biddingNumber;
+    private Long biddingNumber;
     @Column(name = "assigned")
     private int assigned;
 

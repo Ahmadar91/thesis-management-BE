@@ -56,9 +56,19 @@ public class UserController extends Controller
         return user;
     }
 
+    @PostMapping(value = "/updaterole/{id}")
+    public Map<String, Object> updateUserRole(@Valid UsersDTO input)
+    {
+        UsersDTO dInput = new UsersDTO();
+        dInput.setId(input.getId());
+        User user = getById(dInput);
+        user.setRoleId((input.getRoleId()));
+        userService.update(user);
+        return response(new ResponseArgument<>(USER, user));
+    }
 
     @PostMapping(value = "/update/{id}")
-    public Map<String, Object> updateConfirmation(@Valid UsersDTO input)
+    public Map<String, Object> updateUser(@Valid UsersDTO input)
     {
         UsersDTO dInput = new UsersDTO();
         dInput.setId(input.getId());
