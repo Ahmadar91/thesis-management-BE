@@ -57,7 +57,7 @@ public class UserController extends Controller
     }
 
     @PostMapping(value = "/updateRole/{id}")
-    public Map<String, Object> updateUserRole(@Valid UsersDTO input)
+    public Map<String, Object> updateRole(@Valid UsersDTO input)
     {
         UsersDTO dInput = new UsersDTO();
         dInput.setId(input.getId());
@@ -66,7 +66,6 @@ public class UserController extends Controller
         userService.update(user);
         return response(new ResponseArgument<>(USER, user));
     }
-
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateUser(@Valid UsersDTO input)
     {
