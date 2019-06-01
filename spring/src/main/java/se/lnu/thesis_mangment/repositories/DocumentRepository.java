@@ -2,7 +2,7 @@ package se.lnu.thesis_mangment.repositories;
 
 import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.Document;
-import se.lnu.thesis_mangment.model.DocumentInput;
+import se.lnu.thesis_mangment.model.DocumentDTO;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class DocumentRepository extends BaseItemsRepository<Document>
 {
-    public List<Document> get(DocumentInput input)
+    public List<Document> get(DocumentDTO input)
     {
         var searchBuilder = new DocumentSearchBuilder(input);
         var stmt = "FROM Document AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
@@ -37,7 +37,7 @@ public class DocumentRepository extends BaseItemsRepository<Document>
 
     private class DocumentSearchBuilder extends SearchBuilder
     {
-        DocumentSearchBuilder(DocumentInput input)
+        DocumentSearchBuilder(DocumentDTO input)
         {
             if (input != null)
             {

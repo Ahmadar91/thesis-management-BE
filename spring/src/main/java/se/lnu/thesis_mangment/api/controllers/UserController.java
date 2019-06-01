@@ -1,12 +1,9 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.lnu.thesis_mangment.model.User;
-import se.lnu.thesis_mangment.model.UsersInput;
+import se.lnu.thesis_mangment.model.UsersDTO;
 import se.lnu.thesis_mangment.services.UserServices;
 
 import javax.transaction.Transactional;
@@ -24,7 +21,7 @@ public class UserController extends Controller
     private UserServices userService;
 
     @RequestMapping("/login")
-    public Map<String, Object> login(@Valid UsersInput input) throws IllegalAccessException
+    public Map<String, Object> login(@Valid UsersDTO input) throws IllegalAccessException
     {
         if (!input.validatePassword())
         {
@@ -33,22 +30,22 @@ public class UserController extends Controller
         return response(new ResponseArgument<>(USER, userService.get(input)));
     }
 
-    @RequestMapping("/get")
-    public Map<String, Object> get(@Valid UsersInput input)
+    @GetMapping("/get")
+    public Map<String, Object> get(@Valid UsersDTO input)
     {
         return response(new ResponseArgument<>(USER, userService.get(input)));
     }
 
     @PostMapping(value = "/add")
     @Transactional
-    public Map<String, Object> add(@Valid UsersInput input)
+    public Map<String, Object> add(@Valid UsersDTO input)
     {
         User user = setUser(input);
         userService.add(user);
         return response(new ResponseArgument<>("user", user));
     }
 
-    private User setUser(UsersInput input)
+    private User setUser(UsersDTO input)
     {
         User user = new User();
         user.setUsername(input.getUsername());

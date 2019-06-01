@@ -11,11 +11,23 @@ public class SupervisorsConfirmation
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
     private long supervisorId;
-    private long studentId;
     private int confirmed;
     private int projectPlanId;
     private long deleted;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "studentId")
+    private User user;
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 
     public Long getId()
     {
@@ -37,15 +49,7 @@ public class SupervisorsConfirmation
         this.supervisorId = supervisorId;
     }
 
-    public long getStudentId()
-    {
-        return studentId;
-    }
 
-    public void setStudentId(long studentId)
-    {
-        this.studentId = studentId;
-    }
 
     public int getConfirmed()
     {

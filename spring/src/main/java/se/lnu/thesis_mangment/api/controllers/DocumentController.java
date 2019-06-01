@@ -6,7 +6,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.Document;
-import se.lnu.thesis_mangment.model.DocumentInput;
+import se.lnu.thesis_mangment.model.DocumentDTO;
 import se.lnu.thesis_mangment.services.DocumentServices;
 import se.lnu.thesis_mangment.services.FileService;
 
@@ -33,13 +33,15 @@ public class DocumentController extends Controller {
 
 
     @GetMapping(value = "/get")
-    public Map<String, Object> get(@Valid DocumentInput input) {
+    public Map<String, Object> get(@Valid DocumentDTO input)
+    {
         return response(new ResponseArgument<>(DOCUMENT, documentServices.get(input)));
     }
 
     @PostMapping(value = "/add")
     @Transactional
-    public Map<String, Object> add(@Valid DocumentInput input) throws IOException {
+    public Map<String, Object> add(@Valid DocumentDTO input) throws IOException
+    {
         Document document = getDocumentFromInput(input);
         documentServices.add(document);
 
@@ -51,14 +53,16 @@ public class DocumentController extends Controller {
 
 
     @GetMapping(value = "/download", produces = APPLICATION_PDF_VALUE)
-    public Resource download(@Valid DocumentInput input) throws IOException, NotFoundException {
+    public Resource download(@Valid DocumentDTO input) throws IOException, NotFoundException
+    {
         return fileService.get(input.getId() + ".pdf");
     }
 
 
     @PostMapping(value = "/update/{id}")
-    public Map<String, Object> updateDocument(@Valid DocumentInput input) {
-        DocumentInput dInput = new DocumentInput();
+    public Map<String, Object> updateDocument(@Valid DocumentDTO input)
+    {
+        DocumentDTO dInput = new DocumentDTO();
         dInput.setId(input.getId());
         Document document = getById(dInput);
 
@@ -68,7 +72,8 @@ public class DocumentController extends Controller {
 
     }
 
-    public Document getById(@Valid DocumentInput input) {
+    public Document getById(@Valid DocumentDTO input)
+    {
         List<Document> documents = documentServices.get(input);
         if (documents.isEmpty()) {
             throw new ResourceNotFoundException("document not found");
@@ -78,7 +83,8 @@ public class DocumentController extends Controller {
 
     @RequestMapping("/remove/{id}")
     @Transactional
-    public Map<String, Object> delete(@Valid DocumentInput input) {
+    public Map<String, Object> delete(@Valid DocumentDTO input)
+    {
         Document newDocument = getDocumentFromInput(input);
         List<Long> list = new ArrayList<>();
         list.add(input.getId());
@@ -86,7 +92,8 @@ public class DocumentController extends Controller {
         return response(new ResponseArgument<>(DOCUMENT, newDocument));
     }
 
-    private Document getDocumentFromInput(DocumentInput input) {
+    private Document getDocumentFromInput(DocumentDTO input)
+    {
         Document document = new Document();
         document.setTitle(input.getTitle());
         document.setAuthorId(input.getAuthorId());
@@ -97,7 +104,8 @@ public class DocumentController extends Controller {
         return document;
     }
 
-    private Document getDocumentFromInput(DocumentInput input, Document document) {
+    private Document getDocumentFromInput(DocumentDTO input, Document document)
+    {
         document.setId(input.getId());
         document.setTitle(input.getTitle());
         document.setType(input.getType());
@@ -114,7 +122,8 @@ public class DocumentController extends Controller {
 
     }
 
-    private void updateDocument(Document document, DocumentInput input) {
+    private void updateDocument(Document document, DocumentDTO input)
+    {
         if (input.getAuthorId() != 0) {
             document.setAuthorId(input.getAuthorId());
         }

@@ -2,7 +2,7 @@ package se.lnu.thesis_mangment.model;
 
 import javax.validation.constraints.Size;
 
-public class UsersInput
+public class UsersDTO
 {
     private long id;
 

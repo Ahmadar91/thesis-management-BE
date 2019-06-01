@@ -3,7 +3,8 @@ package se.lnu.thesis_mangment.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class DocumentInput {
+public class DocumentDTO
+{
     private long id;
     private String title;
     private long type;

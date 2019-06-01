@@ -2,7 +2,7 @@ package se.lnu.thesis_mangment.repositories;
 
 import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.User;
-import se.lnu.thesis_mangment.model.UsersInput;
+import se.lnu.thesis_mangment.model.UsersDTO;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
@@ -12,15 +12,17 @@ import java.util.List;
 @Repository
 public class UsersRepository extends BaseItemsRepository<User>
 {
-    public List<User> get(UsersInput input)
+    public List<User> get(UsersDTO input)
     {
         var searchBuilder = new UsersSearchBuilder(input);
+        //   var stmt = "FROM User AS t " + "left join fetch t.role " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         return selectAll(stmt, User.class, searchBuilder.getParameterList());
     }
 
     // can be used to authinticate a user
-    public User getUser(UsersInput inputs)
+    public User getUser(UsersDTO inputs)
     {
         var searchBuilder = new UsersSearchBuilder(inputs);
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
@@ -36,7 +38,7 @@ public class UsersRepository extends BaseItemsRepository<User>
 
     private class UsersSearchBuilder extends SearchBuilder
     {
-        UsersSearchBuilder(UsersInput input)
+        UsersSearchBuilder(UsersDTO input)
         {
             if (input != null)
             {

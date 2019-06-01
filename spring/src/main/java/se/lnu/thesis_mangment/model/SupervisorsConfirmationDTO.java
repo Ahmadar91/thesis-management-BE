@@ -1,6 +1,7 @@
 package se.lnu.thesis_mangment.model;
 
-public class SupervisorsConfirmationInput {
+public class SupervisorsConfirmationDTO
+{
 
     private long id;
     private long supervisorId;
@@ -8,7 +9,21 @@ public class SupervisorsConfirmationInput {
     private int confirmed;
     private int projectPlanId;
 
-    public long getSupervisorId() {
+
+    private User user;
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public long getSupervisorId()
+    {
         return supervisorId;
     }
 

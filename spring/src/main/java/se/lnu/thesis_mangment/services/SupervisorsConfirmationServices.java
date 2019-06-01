@@ -3,7 +3,7 @@ package se.lnu.thesis_mangment.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmation;
-import se.lnu.thesis_mangment.model.SupervisorsConfirmationInput;
+import se.lnu.thesis_mangment.model.SupervisorsConfirmationDTO;
 import se.lnu.thesis_mangment.repositories.SupervisorsConfirmationRepository;
 
 import javax.transaction.Transactional;
@@ -15,7 +15,7 @@ public class SupervisorsConfirmationServices
     @Autowired
     private SupervisorsConfirmationRepository repository;
 
-    public List<SupervisorsConfirmation> get(SupervisorsConfirmationInput input)
+    public List<SupervisorsConfirmation> get(SupervisorsConfirmationDTO input)
     {
         return repository.get(input);
     }

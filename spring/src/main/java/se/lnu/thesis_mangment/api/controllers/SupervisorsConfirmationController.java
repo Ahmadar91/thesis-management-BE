@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmation;
-import se.lnu.thesis_mangment.model.SupervisorsConfirmationInput;
+import se.lnu.thesis_mangment.model.SupervisorsConfirmationDTO;
 import se.lnu.thesis_mangment.services.SupervisorsConfirmationServices;
 
 import javax.transaction.Transactional;
@@ -23,14 +23,15 @@ public class SupervisorsConfirmationController extends Controller
     private static final String CONFIRMATION = "confirmation";
 
     @GetMapping(value = "/get")
-    public Map<String, Object> get(@Valid SupervisorsConfirmationInput input)
+    public Map<String, Object> get(@Valid SupervisorsConfirmationDTO input)
     {
-        return response(new ResponseArgument<>(CONFIRMATION, services.get(input)));
+        var tt = services.get(input);
+        return response(new ResponseArgument<>(CONFIRMATION, tt));
     }
 
     @PostMapping(value = "/add")
     @Transactional
-    public Map<String, Object> add(@Valid SupervisorsConfirmationInput input)
+    public Map<String, Object> add(@Valid SupervisorsConfirmationDTO input)
     {
 
         SupervisorsConfirmation supervisorsConfirmation = getSupervisorsConfirmationFromInput(input);
@@ -39,8 +40,9 @@ public class SupervisorsConfirmationController extends Controller
     }
 
     @PostMapping(value = "/update/{id}")
-    public Map<String, Object> updateConfirmation(@Valid SupervisorsConfirmationInput input) {
-        SupervisorsConfirmationInput dInput = new SupervisorsConfirmationInput();
+    public Map<String, Object> updateConfirmation(@Valid SupervisorsConfirmationDTO input)
+    {
+        SupervisorsConfirmationDTO dInput = new SupervisorsConfirmationDTO();
         dInput.setId(input.getId());
         SupervisorsConfirmation supervisorsConfirmation = getById(dInput);
 
@@ -50,7 +52,8 @@ public class SupervisorsConfirmationController extends Controller
         return response(new ResponseArgument<>(CONFIRMATION, supervisorsConfirmation));
     }
 
-    public SupervisorsConfirmation getById(@Valid SupervisorsConfirmationInput input) {
+    public SupervisorsConfirmation getById(@Valid SupervisorsConfirmationDTO input)
+    {
         List<SupervisorsConfirmation> list = services.get(input);
         if (list.isEmpty()) {
             throw new ResourceNotFoundException("confirmation not found");
@@ -60,12 +63,12 @@ public class SupervisorsConfirmationController extends Controller
 
 
     // need improve
-    private SupervisorsConfirmation getSupervisorsConfirmationFromInput(SupervisorsConfirmationInput input)
+    private SupervisorsConfirmation getSupervisorsConfirmationFromInput(SupervisorsConfirmationDTO input)
     {
         SupervisorsConfirmation supervisorsConfirmation = new SupervisorsConfirmation();
         supervisorsConfirmation.setConfirmed(input.getConfirmed());
         supervisorsConfirmation.setProjectPlanId(input.getProjectPlanId());
-        supervisorsConfirmation.setStudentId(input.getStudentId());
+        supervisorsConfirmation.setUser(input.getUser());
         supervisorsConfirmation.setSupervisorId(input.getSupervisorId());
         return supervisorsConfirmation;
     }

@@ -3,7 +3,7 @@ package se.lnu.thesis_mangment.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.lnu.thesis_mangment.model.User;
-import se.lnu.thesis_mangment.model.UsersInput;
+import se.lnu.thesis_mangment.model.UsersDTO;
 import se.lnu.thesis_mangment.repositories.UsersRepository;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class UsersServices
     @Autowired
     private UsersRepository repository;
 
-    public List<User> get(UsersInput input)
+    public List<User> get(UsersDTO input)
     {
         return repository.get(input);
     }

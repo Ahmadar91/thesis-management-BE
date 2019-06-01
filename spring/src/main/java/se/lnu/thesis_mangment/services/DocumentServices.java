@@ -3,7 +3,7 @@ package se.lnu.thesis_mangment.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.lnu.thesis_mangment.model.Document;
-import se.lnu.thesis_mangment.model.DocumentInput;
+import se.lnu.thesis_mangment.model.DocumentDTO;
 import se.lnu.thesis_mangment.repositories.DocumentRepository;
 
 import javax.transaction.Transactional;
@@ -14,7 +14,8 @@ public class DocumentServices {
     @Autowired
     private DocumentRepository repository;
 
-    public List<Document> get(DocumentInput input) {
+    public List<Document> get(DocumentDTO input)
+    {
         return repository.get(input);
     }
 

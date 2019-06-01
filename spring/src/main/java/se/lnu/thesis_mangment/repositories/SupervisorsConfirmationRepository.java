@@ -2,7 +2,7 @@ package se.lnu.thesis_mangment.repositories;
 
 import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.SupervisorsConfirmation;
-import se.lnu.thesis_mangment.model.SupervisorsConfirmationInput;
+import se.lnu.thesis_mangment.model.SupervisorsConfirmationDTO;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
@@ -12,10 +12,12 @@ import java.util.List;
 @Repository
 public class SupervisorsConfirmationRepository extends BaseItemsRepository<SupervisorsConfirmation>
 {
-    public List<SupervisorsConfirmation> get(SupervisorsConfirmationInput input)
+    public List<SupervisorsConfirmation> get(SupervisorsConfirmationDTO input)
     {
         var searchBuilder = new SupervisorConfirmationBuilder(input);
-        var stmt = "FROM SupervisorsConfirmation AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        //var stmt = "FROM SupervisorsConfirmation AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        var stmt = "FROM SupervisorsConfirmation AS t " + "left join fetch t.user " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+
         return selectAll(stmt, SupervisorsConfirmation.class, searchBuilder.getParameterList());
     }
 
@@ -28,7 +30,7 @@ public class SupervisorsConfirmationRepository extends BaseItemsRepository<Super
 
     private class SupervisorConfirmationBuilder extends SearchBuilder
     {
-        SupervisorConfirmationBuilder(SupervisorsConfirmationInput input)
+        SupervisorConfirmationBuilder(SupervisorsConfirmationDTO input)
         {
             if (input != null)
             {

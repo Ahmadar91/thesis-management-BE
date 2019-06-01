@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import se.lnu.thesis_mangment.model.UsersInput;
+import se.lnu.thesis_mangment.model.UsersDTO;
 import se.lnu.thesis_mangment.services.RolesService;
 
 import javax.validation.Valid;
@@ -21,7 +21,7 @@ public class RolesController extends Controller
     private RolesService rolesService;
 
     @RequestMapping("")
-    public Map<String, Object> getRoles(@Valid UsersInput input)
+    public Map<String, Object> getRoles(@Valid UsersDTO input)
     {
         return response(new ResponseArgument<>("role", rolesService.get()));
     }

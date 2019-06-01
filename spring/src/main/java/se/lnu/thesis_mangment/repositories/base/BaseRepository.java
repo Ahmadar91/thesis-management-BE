@@ -72,10 +72,10 @@ public class BaseRepository
         int i = 0;
         for (T t : list)
         {
-            save(t);
+            entityManager.persist(t);
             i++;
-            int BATCH_SIZE = 100;
-            if (i % BATCH_SIZE == 0)
+            int batchSize = 100;
+            if (i % batchSize == 0)
             {
                 entityManager.clear();
                 entityManager.flush();
