@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.model.UsersDTO;
 import se.lnu.thesis_mangment.repositories.base.BaseItemsRepository;
+import se.lnu.thesis_mangment.repositories.query.Parameter;
 import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 
 import javax.transaction.Transactional;
@@ -27,6 +28,12 @@ public class UsersRepository extends BaseItemsRepository<User>
         var searchBuilder = new UsersSearchBuilder(inputs);
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         return select(stmt, User.class, searchBuilder.getParameterList());
+    }
+
+    public User findByUsername(String username)
+    {
+        var stmt = "FROM User AS t " + "where " + "t.deleted = 0 and t.username = :username";
+        return select(stmt, User.class, new Parameter<>("username", username));
     }
 
     @Transactional

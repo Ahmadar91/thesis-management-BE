@@ -1,46 +1,41 @@
 package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.model.UsersDTO;
 import se.lnu.thesis_mangment.services.UserServices;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping(value = "/api/user")
-public class UserController extends Controller
+@RequestMapping(value = "/auth/")
+public class LoginController extends Controller
 {
     private static final String USER = "user";
 
     @Autowired
     private UserServices userService;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    @RequestMapping("/login")
+    public Map<String, Object> login(@Valid UsersDTO input) throws IllegalAccessException
+    {
+        if (!input.validatePassword())
+        {
+            throw new IllegalAccessException();
+        }
 
+
+        return response(new ResponseArgument<>(USER, userService.get(input)));
+    }
 
     @GetMapping("/get")
     public Map<String, Object> get(@Valid UsersDTO input)
     {
         return response(new ResponseArgument<>(USER, userService.get(input)));
-    }
-
-    @PostMapping(value = "/add")
-    @Transactional
-    public Map<String, Object> add(@Valid UsersDTO input)
-    {
-        User user = setUser(input);
-
-        user.setPassword(passwordEncoder.encode(input.getPassword()));
-        userService.add(user);
-        return response(new ResponseArgument<>("user", user));
     }
 
     private User setUser(UsersDTO input)

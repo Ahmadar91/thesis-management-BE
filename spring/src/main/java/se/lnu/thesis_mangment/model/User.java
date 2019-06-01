@@ -19,6 +19,7 @@ public class User
     private String email = "";
     private String password = "";
     private Long deleted = 0L;
+    private Long supervisorId = 0L;
 
     public Long getId()
     {
@@ -102,4 +103,13 @@ public class User
         this.roleId = roleId;
     }
 
+    public Long getSupervisorId()
+    {
+        return supervisorId;
+    }
+
+    public void setSupervisorId(Long supervisorId)
+    {
+        this.supervisorId = supervisorId;
+    }
 }
