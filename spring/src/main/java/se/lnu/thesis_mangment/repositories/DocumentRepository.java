@@ -26,15 +26,6 @@ public class DocumentRepository extends BaseItemsRepository<Document>
     }
 
 
-    @Transactional
-    public void update(Document document)
-    {
-        updateItem(document, Document.class);
-    }
-
-
-
-
     private class DocumentSearchBuilder extends SearchBuilder
     {
         DocumentSearchBuilder(DocumentDTO input)

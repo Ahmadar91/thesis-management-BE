@@ -133,6 +133,10 @@ public class DocumentController extends Controller {
         if (input.getGradePass() >= 0) {
             document.setGradePass(input.getGradePass());
         }
+        if (input.getTitle() != null)
+        {
+            document.setTitle(input.getTitle());
+        }
         documentServices.update(document);
     }
 
