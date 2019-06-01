@@ -2,6 +2,7 @@ package se.lnu.thesis_mangment.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.User;
 import se.lnu.thesis_mangment.model.UsersDTO;
 import se.lnu.thesis_mangment.services.UserServices;
@@ -55,6 +56,32 @@ public class UserController extends Controller
         user.setRoleId(input.getRoleId());
         user.setEmail(input.getEmail());
         user.setLastName(input.getEmail());
+        return user;
+    }
+
+
+    @PostMapping(value = "/update/{id}")
+    public Map<String, Object> updateConfirmation(@Valid UsersDTO input)
+    {
+        UsersDTO dInput = new UsersDTO();
+        dInput.setId(input.getId());
+        User user = getById(dInput);
+        user.setFirstName(input.getFirstName());
+        user.setLastName(input.getLastName());
+        user.setUsername((input.getUsername()));
+        user.setEmail((input.getEmail()));
+        user.setRoleId((input.getRoleId()));
+        userService.update(user);
+        return response(new ResponseArgument<>(USER, user));
+    }
+
+    public User getById(UsersDTO input)
+    {
+        User user = userService.get(input);
+        if (user == null)
+        {
+            throw new ResourceNotFoundException("user not found");
+        }
         return user;
     }
 
