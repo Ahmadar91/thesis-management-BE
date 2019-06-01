@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "feedbacks")
-public class Submission
+public class Feedbacks
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
     private Long studentId;
     private Long documentId;
@@ -53,3 +54,4 @@ public class Submission
         this.deleted = deleted;
     }
 }
+

@@ -56,7 +56,7 @@ public class UserController extends Controller
         return user;
     }
 
-    @PostMapping(value = "/updaterole/{id}")
+    @PostMapping(value = "/updateRole/{id}")
     public Map<String, Object> updateUserRole(@Valid UsersDTO input)
     {
         UsersDTO dInput = new UsersDTO();
