@@ -11,6 +11,18 @@ public class UsersDTO
     // student as default
     private long roleId;
 
+    private Long supervisorId = 0L;
+
+    public Long getSupervisorId()
+    {
+        return supervisorId;
+    }
+
+    public void setSupervisorId(Long supervisorId)
+    {
+        this.supervisorId = supervisorId;
+    }
+
 
     private long deleted;
 
