@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "supervisorsConfirmation")
-public class SupervisorsConfirmation extends User
+public class SupervisorsConfirmation
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
