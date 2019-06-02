@@ -1,11 +1,14 @@
 package se.lnu.thesis_mangment.api.controllers;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import se.lnu.thesis_mangment.configurations.responses.ResourceNotFoundException;
 import se.lnu.thesis_mangment.model.Feedbacks;
 import se.lnu.thesis_mangment.model.FeedbacksDTO;
 import se.lnu.thesis_mangment.services.FeedbacksServices;
+import se.lnu.thesis_mangment.services.FileService;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -13,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -23,8 +28,8 @@ public class FeedbacksController extends Controller
     private static final String FEEDBACKS = "feedbacks";
     @Autowired
     private FeedbacksServices feedbacksServices;
-
-
+    @Autowired
+    private FileService fileService;
     @GetMapping(value = "/get")
     public Map<String, Object> get(@Valid FeedbacksDTO input)
     {
@@ -37,7 +42,18 @@ public class FeedbacksController extends Controller
     {
         Feedbacks feedbacks = getFeedbacksFromInput(input);
         feedbacksServices.add(feedbacks);
+
+        // Save the file
+        fileService.saveFeedback(input.getFile(), feedbacks.getId().toString() + ".pdf");
+
         return response(new ResponseArgument<>(FEEDBACKS, feedbacks));
+    }
+
+
+    @GetMapping(value = "/download", produces = APPLICATION_PDF_VALUE)
+    public Resource download(@Valid FeedbacksDTO input) throws IOException, NotFoundException
+    {
+        return fileService.getFeedback(input.getId() + ".pdf");
     }
 
 

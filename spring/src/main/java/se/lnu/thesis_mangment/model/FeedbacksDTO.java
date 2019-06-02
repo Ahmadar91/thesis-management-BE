@@ -1,6 +1,8 @@
 package se.lnu.thesis_mangment.model;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FeedbacksDTO
 {
 
@@ -8,6 +10,17 @@ public class FeedbacksDTO
     private Long studentId;
     private Long documentId;
     private Long deleted;
+    private MultipartFile file;
+
+    public MultipartFile getFile()
+    {
+        return file;
+    }
+
+    public void setFile(MultipartFile file)
+    {
+        this.file = file;
+    }
 
     public Long getId()
     {

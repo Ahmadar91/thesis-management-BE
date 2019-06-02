@@ -22,6 +22,14 @@ public class FileService {
         Files.write(path, bytes);
     }
 
+    public void saveFeedback(MultipartFile file, String fileName) throws IOException
+    {
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get(location + "feedbacks/" + fileName);
+        Files.write(path, bytes);
+    }
+
+
     public Resource get(String fileName) throws MalformedURLException, NotFoundException {
         Path path = Paths.get(this.location + fileName);
         path.resolve(fileName).normalize();
@@ -31,6 +39,20 @@ public class FileService {
         } else {
             throw new NotFoundException(
                     "The file doesn't exist! File name should be in the following form: 'document \"Id\".pdf");
+        }
+    }
+
+    public Resource getFeedback(String fileName) throws MalformedURLException, NotFoundException
+    {
+        Path path = Paths.get(this.location + "feedbacks/" + fileName);
+        path.resolve(fileName).normalize();
+        Resource resource = new UrlResource(path.toUri());
+        if (resource.exists())
+        {
+            return resource;
+        } else
+        {
+            throw new NotFoundException("The file doesn't exist! File name should be in the following form: 'document \"Id\".pdf");
         }
     }
 }
