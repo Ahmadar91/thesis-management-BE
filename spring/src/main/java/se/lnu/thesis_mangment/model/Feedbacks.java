@@ -16,7 +16,7 @@ public class Feedbacks
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "documentId")
     private Document document;
-    private Long deleted;
+    private Long deleted = 0L;
 
     public Long getAuthorId()
     {

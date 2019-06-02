@@ -12,6 +12,16 @@ public class FeedbacksDTO
     private Long deleted;
     private MultipartFile file;
 
+    public MultipartFile getFile()
+    {
+        return file;
+    }
+
+    public void setFile(MultipartFile file)
+    {
+        this.file = file;
+    }
+
     public Long getId()
     {
         return id;
@@ -52,13 +62,5 @@ public class FeedbacksDTO
         this.deleted = deleted;
     }
 
-    public MultipartFile getFile()
-    {
-        return file;
-    }
 
-    public void setFile(MultipartFile file)
-    {
-        this.file = file;
-    }
 }

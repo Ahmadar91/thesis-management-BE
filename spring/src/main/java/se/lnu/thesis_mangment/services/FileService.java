@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 @Service
 public class FileService {
-    private String location = "./src/main/resources/uploads/";
+    private String location = "./spring/src/main/resources/uploads/";
 
     public void save(MultipartFile file, String fileName) throws IOException {
         byte[] bytes = file.getBytes();
