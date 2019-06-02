@@ -78,6 +78,7 @@ public class SubmissionController extends Controller
         submission.setId(input.getId());
         submission.setDeadline(input.getDeadline());
         submission.setStep(input.getStep());
+        submission.setTitle(input.getTitle());
         return submission;
 
     }
@@ -87,6 +88,10 @@ public class SubmissionController extends Controller
         if (input.getId() != 0)
         {
             submission.setId(input.getId());
+        }
+        if (input.getTitle() != null)
+        {
+            submission.setTitle(input.getTitle());
         }
         if (input.getDeadline() != null)
         {

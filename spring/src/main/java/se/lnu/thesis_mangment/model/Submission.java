@@ -16,6 +16,10 @@ public class Submission
     @CreationTimestamp
     private Timestamp deadline;
 
+    private String title;
+
+    private Long deleted = 0L;
+
     public Long getId()
     {
         return id;
@@ -44,5 +48,21 @@ public class Submission
     public void setDeadline(Timestamp deadline)
     {
         this.deadline = deadline;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Long getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Long deleted) {
+        this.deleted = deleted;
     }
 }

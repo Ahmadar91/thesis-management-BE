@@ -20,9 +20,9 @@ public class FeedbacksRepository extends BaseItemsRepository<Feedbacks>
     }
 
     @Transactional
-    public void add(Feedbacks biddings)
+    public void add(Feedbacks feedbacks)
     {
-        save(biddings);
+        save(feedbacks);
     }
 
 
@@ -40,9 +40,9 @@ public class FeedbacksRepository extends BaseItemsRepository<Feedbacks>
                 {
                     super.add("and t.documentId = :documentId ", "documentId", input.getDocumentId());
                 }
-                if ((input.getStudentId() > 0))
+                if ((input.getAuthorId() > 0))
                 {
-                    super.add("and t.studentId = :studentId ", "studentId", input.getStudentId());
+                    super.add("and t.studentId = :studentId ", "studentId", input.getAuthorId());
                 }
             }
         }

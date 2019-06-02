@@ -7,7 +7,7 @@ public class FeedbacksDTO
 {
 
     private Long id;
-    private Long studentId;
+    private Long authorId;
     private Long documentId;
     private Long deleted;
     private MultipartFile file;
@@ -32,14 +32,14 @@ public class FeedbacksDTO
         this.id = id;
     }
 
-    public Long getStudentId()
+    public Long getAuthorId()
     {
-        return studentId;
+        return authorId;
     }
 
-    public void setStudentId(Long studentId)
+    public void setAuthorId(Long authorId)
     {
-        this.studentId = studentId;
+        this.authorId = authorId;
     }
 
     public Long getDocumentId()

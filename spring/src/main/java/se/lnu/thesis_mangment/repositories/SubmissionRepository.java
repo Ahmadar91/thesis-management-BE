@@ -32,7 +32,7 @@ public class SubmissionRepository extends BaseItemsRepository<Submission>
         {
             if (input != null)
             {
-                if ((input.getId() > 0))
+                if ((input.getId() != null && (input.getId() > 0)))
                 {
                     super.add("and t.id = :id ", "id", input.getId());
                 }
