@@ -11,7 +11,7 @@ public class UsersDTO
     // student as default
     private long roleId;
 
-    private Long supervisorId = 0L;
+    private Long supervisorId;
 
     public Long getSupervisorId()
     {

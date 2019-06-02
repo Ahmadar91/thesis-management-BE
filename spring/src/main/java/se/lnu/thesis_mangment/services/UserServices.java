@@ -31,5 +31,9 @@ public class UserServices
         repository.update(item);
     }
 
+    public User findByUsernameAndPassword(String username)
+    {
+        return repository.findByUsername(username);
+    }
 
 }
