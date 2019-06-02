@@ -18,6 +18,8 @@ public class Biddings
     @Column(name = "assigned")
     private int assigned;
 
+    private Long deleted;
+
     public long getId()
     {
         return id;
@@ -69,4 +71,13 @@ public class Biddings
     }
 
 
+    public Long getDeleted()
+    {
+        return deleted;
+    }
+
+    public void setDeleted(Long deleted)
+    {
+        this.deleted = deleted;
+    }
 }
