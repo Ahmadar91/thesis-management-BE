@@ -92,22 +92,22 @@ public class FeedbacksController extends Controller
     {
         Feedbacks feedbacks = new Feedbacks();
         feedbacks.setId(input.getId());
-        feedbacks.setStudentId(input.getStudentId());
-        feedbacks.setDocumentId(input.getDocumentId());
+        feedbacks.setAuthorId(input.getAuthorId());
         feedbacks.setDeleted(input.getDeleted());
+        feedbacks.setDocument(input.getDocument());
         return feedbacks;
 
     }
 
     private void updateFeedbacks(Feedbacks feedbacks, FeedbacksDTO input)
     {
-        if (input.getStudentId() != 0)
+        if (input.getAuthorId() != 0)
         {
-            feedbacks.setStudentId(input.getStudentId());
+            feedbacks.setAuthorId(input.getAuthorId());
         }
-        if (input.getDocumentId() >= 0)
+        if (input.getDocument() != null)
         {
-            feedbacks.setDocumentId(input.getDocumentId());
+            feedbacks.setDocument(input.getDocument());
         }
         if (input.getDeleted() >= 0)
         {

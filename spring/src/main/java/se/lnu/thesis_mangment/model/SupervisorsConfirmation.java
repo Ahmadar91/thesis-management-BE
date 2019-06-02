@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "supervisorsConfirmation")
-public class SupervisorsConfirmation extends User
+public class SupervisorsConfirmation
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,16 +18,6 @@ public class SupervisorsConfirmation extends User
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "studentId")
     private User user;
-
-    public User getUser()
-    {
-        return user;
-    }
-
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
 
     public Long getId()
     {
@@ -48,8 +38,6 @@ public class SupervisorsConfirmation extends User
     {
         this.supervisorId = supervisorId;
     }
-
-
 
     public int getConfirmed()
     {
@@ -79,5 +67,15 @@ public class SupervisorsConfirmation extends User
     public void setDeleted(long deleted)
     {
         this.deleted = deleted;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 }

@@ -15,7 +15,8 @@ public class FeedbacksRepository extends BaseItemsRepository<Feedbacks>
     public List<Feedbacks> get(FeedbacksDTO input)
     {
         var searchBuilder = new BiddingsSearchBuilder(input);
-        var stmt = "FROM Feedbacks AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        //var stmt = "FROM Feedbacks AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
+        var stmt = "FROM Feedbacks AS t " + "left join fetch t.document " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         return selectAll(stmt, Feedbacks.class, searchBuilder.getParameterList());
     }
 
@@ -36,13 +37,13 @@ public class FeedbacksRepository extends BaseItemsRepository<Feedbacks>
                 {
                     super.add("and t.id = :id ", "id", input.getId());
                 }
-                if ((input.getDocumentId() > 0))
+//                if ((input.getDocumentId() > 0))
+//                {
+                //                 super.add("and t.documentId = :documentId ", "documentId", input.getDocumentId());
+                //               }
+                if ((input.getAuthorId() != null && input.getAuthorId() > 0))
                 {
-                    super.add("and t.documentId = :documentId ", "documentId", input.getDocumentId());
-                }
-                if ((input.getStudentId() > 0))
-                {
-                    super.add("and t.studentId = :studentId ", "studentId", input.getStudentId());
+                    super.add("and t.authorId = :authorId ", "authorId", input.getAuthorId());
                 }
             }
         }

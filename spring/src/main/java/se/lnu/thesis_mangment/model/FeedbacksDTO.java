@@ -7,20 +7,10 @@ public class FeedbacksDTO
 {
 
     private Long id;
-    private Long studentId;
-    private Long documentId;
+    private Long authorId;
+    private Document document;
     private Long deleted;
     private MultipartFile file;
-
-    public MultipartFile getFile()
-    {
-        return file;
-    }
-
-    public void setFile(MultipartFile file)
-    {
-        this.file = file;
-    }
 
     public Long getId()
     {
@@ -32,24 +22,24 @@ public class FeedbacksDTO
         this.id = id;
     }
 
-    public Long getStudentId()
+    public Long getAuthorId()
     {
-        return studentId;
+        return authorId;
     }
 
-    public void setStudentId(Long studentId)
+    public void setAuthorId(Long authorId)
     {
-        this.studentId = studentId;
+        this.authorId = authorId;
     }
 
-    public Long getDocumentId()
+    public Document getDocument()
     {
-        return documentId;
+        return document;
     }
 
-    public void setDocumentId(Long documentId)
+    public void setDocument(Document document)
     {
-        this.documentId = documentId;
+        this.document = document;
     }
 
     public Long getDeleted()
@@ -60,5 +50,15 @@ public class FeedbacksDTO
     public void setDeleted(Long deleted)
     {
         this.deleted = deleted;
+    }
+
+    public MultipartFile getFile()
+    {
+        return file;
+    }
+
+    public void setFile(MultipartFile file)
+    {
+        this.file = file;
     }
 }

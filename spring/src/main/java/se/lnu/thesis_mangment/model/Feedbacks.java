@@ -10,9 +10,23 @@ public class Feedbacks
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    private Long studentId;
-    private Long documentId;
+
+
+    private Long authorId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "documentId")
+    private Document document;
     private Long deleted;
+
+    public Long getAuthorId()
+    {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId)
+    {
+        this.authorId = authorId;
+    }
 
     public Long getId()
     {
@@ -24,24 +38,15 @@ public class Feedbacks
         this.id = id;
     }
 
-    public Long getStudentId()
+
+    public Document getDocument()
     {
-        return studentId;
+        return document;
     }
 
-    public void setStudentId(Long studentId)
+    public void setDocument(Document document)
     {
-        this.studentId = studentId;
-    }
-
-    public Long getDocumentId()
-    {
-        return documentId;
-    }
-
-    public void setDocumentId(Long documentId)
-    {
-        this.documentId = documentId;
+        this.document = document;
     }
 
     public Long getDeleted()
