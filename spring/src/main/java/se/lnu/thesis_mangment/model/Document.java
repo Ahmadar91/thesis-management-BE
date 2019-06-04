@@ -21,9 +21,10 @@ public class Document
     private Long supervisorId;
     private Long readerFeedbackId;
     private Long opponentFeedbackId;
-    private Long deleted;
+    private Long deleted = 0L;
     private int gradeNum;
     private int gradePass;
+
 
     /**
      * Gets id.

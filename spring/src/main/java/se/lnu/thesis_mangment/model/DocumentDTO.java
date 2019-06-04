@@ -113,6 +113,15 @@ public class DocumentDTO
         this.supervisorId = supervisorId;
     }
 
+    public long getDeleted()
+    {
+        return deleted;
+    }
+
+    public void setDeleted(long deleted)
+    {
+        this.deleted = deleted;
+    }
 
     /**
      * Gets reader feedback id.
@@ -232,23 +241,6 @@ public class DocumentDTO
         this.opponentId = opponentId;
     }
 
-    /**
-     * Gets deleted.
-     *
-     * @return the deleted
-     */
-    public long getDeleted() {
-        return deleted;
-    }
-
-    /**
-     * Sets deleted.
-     *
-     * @param deleted the deleted
-     */
-    public void setDeleted(long deleted) {
-        this.deleted = deleted;
-    }
 
     /**
      * Gets file.
