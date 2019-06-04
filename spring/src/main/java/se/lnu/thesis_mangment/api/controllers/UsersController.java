@@ -10,6 +10,9 @@ import se.lnu.thesis_mangment.services.UsersServices;
 import javax.validation.Valid;
 import java.util.Map;
 
+/**
+ * The type Users controller.
+ */
 @RestController
 @RequestMapping(value = "/api/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -18,6 +21,12 @@ public class UsersController extends Controller
     @Autowired
     private UsersServices usersService;
 
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @RequestMapping("/get")
     public Map<String, Object> get(@Valid UsersDTO input)
     {

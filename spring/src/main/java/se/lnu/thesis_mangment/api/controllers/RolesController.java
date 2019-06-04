@@ -11,6 +11,9 @@ import se.lnu.thesis_mangment.services.RolesService;
 import javax.validation.Valid;
 import java.util.Map;
 
+/**
+ * The type Roles controller.
+ */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/roles")
@@ -20,6 +23,12 @@ public class RolesController extends Controller
     @Autowired
     private RolesService rolesService;
 
+    /**
+     * Gets roles.
+     *
+     * @param input the input
+     * @return the roles
+     */
     @RequestMapping("")
     public Map<String, Object> getRoles(@Valid UsersDTO input)
     {
@@ -27,6 +36,12 @@ public class RolesController extends Controller
     }
 
 
+    /**
+     * Gets role.
+     *
+     * @param id the id
+     * @return the role
+     */
     @RequestMapping("{id}")
     public Map<String, Object> getRole(@PathVariable("id") long id)
     {

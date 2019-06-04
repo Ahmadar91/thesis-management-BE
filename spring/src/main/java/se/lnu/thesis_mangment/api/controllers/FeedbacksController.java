@@ -20,6 +20,9 @@ import java.util.Map;
 import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
 
 
+/**
+ * The type Feedbacks controller.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/feedbacks")
@@ -30,12 +33,26 @@ public class FeedbacksController extends Controller
     private FeedbacksServices feedbacksServices;
     @Autowired
     private FileService fileService;
+
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @GetMapping(value = "/get")
     public Map<String, Object> get(@Valid FeedbacksDTO input)
     {
         return response(new ResponseArgument<>(FEEDBACKS, feedbacksServices.get(input)));
     }
 
+    /**
+     * Add map.
+     *
+     * @param input the input
+     * @return the map
+     * @throws IOException the io exception
+     */
     @PostMapping(value = "/add")
     @Transactional
     public Map<String, Object> add(@Valid FeedbacksDTO input) throws IOException
@@ -50,6 +67,14 @@ public class FeedbacksController extends Controller
     }
 
 
+    /**
+     * Download resource.
+     *
+     * @param input the input
+     * @return the resource
+     * @throws IOException       the io exception
+     * @throws NotFoundException the not found exception
+     */
     @GetMapping(value = "/download", produces = APPLICATION_PDF_VALUE)
     public Resource download(@Valid FeedbacksDTO input) throws IOException, NotFoundException
     {
@@ -57,6 +82,12 @@ public class FeedbacksController extends Controller
     }
 
 
+    /**
+     * Update feedbacks map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateFeedbacks(@Valid FeedbacksDTO input)
     {
@@ -67,6 +98,12 @@ public class FeedbacksController extends Controller
         return response(new ResponseArgument<>(FEEDBACKS, feedbacks));
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param input the input
+     * @return the by id
+     */
     public Feedbacks getById(@Valid FeedbacksDTO input)
     {
         List<Feedbacks> feedbacks = feedbacksServices.get(input);
@@ -77,6 +114,12 @@ public class FeedbacksController extends Controller
         return feedbacks.get(0);
     }
 
+    /**
+     * Delete map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @RequestMapping("/remove/{id}")
     @Transactional
     public Map<String, Object> delete(@Valid FeedbacksDTO input)

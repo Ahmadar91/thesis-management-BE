@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * The type Supervisors confirmation controller.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/supervisor-confirmation")
@@ -22,6 +25,12 @@ public class SupervisorsConfirmationController extends Controller
     private SupervisorsConfirmationServices services;
     private static final String CONFIRMATION = "confirmation";
 
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @GetMapping(value = "/get")
     public Map<String, Object> get(@Valid SupervisorsConfirmationDTO input)
     {
@@ -29,6 +38,12 @@ public class SupervisorsConfirmationController extends Controller
         return response(new ResponseArgument<>(CONFIRMATION, tt));
     }
 
+    /**
+     * Add map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/add")
     @Transactional
     public Map<String, Object> add(@Valid SupervisorsConfirmationDTO input)
@@ -39,6 +54,12 @@ public class SupervisorsConfirmationController extends Controller
         return response(new ResponseArgument<>(CONFIRMATION, supervisorsConfirmation));
     }
 
+    /**
+     * Update confirmation map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateConfirmation(@Valid SupervisorsConfirmationDTO input)
     {
@@ -52,6 +73,12 @@ public class SupervisorsConfirmationController extends Controller
         return response(new ResponseArgument<>(CONFIRMATION, supervisorsConfirmation));
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param input the input
+     * @return the by id
+     */
     public SupervisorsConfirmation getById(@Valid SupervisorsConfirmationDTO input)
     {
         List<SupervisorsConfirmation> list = services.get(input);
@@ -72,7 +99,6 @@ public class SupervisorsConfirmationController extends Controller
         supervisorsConfirmation.setSupervisorId(input.getSupervisorId());
         return supervisorsConfirmation;
     }
-
 
 
 }

@@ -9,9 +9,18 @@ import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * The type Submission repository.
+ */
 @Repository
 public class SubmissionRepository extends BaseItemsRepository<Submission>
 {
+    /**
+     * Get list.
+     *
+     * @param input the input
+     * @return the list
+     */
     public List<Submission> get(SubmissionDTO input)
     {
         var searchBuilder = new SubmissionSearchBuilder(input);
@@ -19,6 +28,11 @@ public class SubmissionRepository extends BaseItemsRepository<Submission>
         return selectAll(stmt, Submission.class, searchBuilder.getParameterList());
     }
 
+    /**
+     * Add.
+     *
+     * @param submission the submission
+     */
     @Transactional
     public void add(Submission submission)
     {
@@ -28,6 +42,11 @@ public class SubmissionRepository extends BaseItemsRepository<Submission>
 
     private class SubmissionSearchBuilder extends SearchBuilder
     {
+        /**
+         * Instantiates a new Submission search builder.
+         *
+         * @param input the input
+         */
         SubmissionSearchBuilder(SubmissionDTO input)
         {
             if (input != null)

@@ -9,9 +9,18 @@ import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * The type Document repository.
+ */
 @Repository
 public class DocumentRepository extends BaseItemsRepository<Document>
 {
+    /**
+     * Get list.
+     *
+     * @param input the input
+     * @return the list
+     */
     public List<Document> get(DocumentDTO input)
     {
         var searchBuilder = new DocumentSearchBuilder(input);
@@ -19,6 +28,11 @@ public class DocumentRepository extends BaseItemsRepository<Document>
         return selectAll(stmt, Document.class, searchBuilder.getParameterList());
     }
 
+    /**
+     * Add.
+     *
+     * @param document the document
+     */
     @Transactional
     public void add(Document document)
     {
@@ -28,6 +42,11 @@ public class DocumentRepository extends BaseItemsRepository<Document>
 
     private class DocumentSearchBuilder extends SearchBuilder
     {
+        /**
+         * Instantiates a new Document search builder.
+         *
+         * @param input the input
+         */
         DocumentSearchBuilder(DocumentDTO input)
         {
             if (input != null)

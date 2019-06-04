@@ -20,6 +20,9 @@ import java.util.Map;
 import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
 
 
+/**
+ * The type Document controller.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/document")
@@ -32,12 +35,25 @@ public class DocumentController extends Controller {
     private FileService fileService;
 
 
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @GetMapping(value = "/get")
     public Map<String, Object> get(@Valid DocumentDTO input)
     {
         return response(new ResponseArgument<>(DOCUMENT, documentServices.get(input)));
     }
 
+    /**
+     * Add map.
+     *
+     * @param input the input
+     * @return the map
+     * @throws IOException the io exception
+     */
     @PostMapping(value = "/add")
     @Transactional
     public Map<String, Object> add(@Valid DocumentDTO input) throws IOException
@@ -52,6 +68,14 @@ public class DocumentController extends Controller {
     }
 
 
+    /**
+     * Download resource.
+     *
+     * @param input the input
+     * @return the resource
+     * @throws IOException       the io exception
+     * @throws NotFoundException the not found exception
+     */
     @GetMapping(value = "/download", produces = APPLICATION_PDF_VALUE)
     public Resource download(@Valid DocumentDTO input) throws IOException, NotFoundException
     {
@@ -59,6 +83,12 @@ public class DocumentController extends Controller {
     }
 
 
+    /**
+     * Update document map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateDocument(@Valid DocumentDTO input)
     {
@@ -72,6 +102,12 @@ public class DocumentController extends Controller {
 
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param input the input
+     * @return the by id
+     */
     public Document getById(@Valid DocumentDTO input)
     {
         List<Document> documents = documentServices.get(input);
@@ -81,6 +117,12 @@ public class DocumentController extends Controller {
         return documents.get(0);
     }
 
+    /**
+     * Delete map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @RequestMapping("/remove/{id}")
     @Transactional
     public Map<String, Object> delete(@Valid DocumentDTO input)
@@ -102,24 +144,6 @@ public class DocumentController extends Controller {
         document.setType(input.getType());
         document.setOpponentFeedbackId(input.getOpponentFeedbackId());
         return document;
-    }
-
-    private Document getDocumentFromInput(DocumentDTO input, Document document)
-    {
-        document.setId(input.getId());
-        document.setTitle(input.getTitle());
-        document.setType(input.getType());
-        document.setSupervisorFeedbackId(input.getSupervisorFeedbackId());
-        document.setAuthorId(input.getAuthorId());
-        document.setOpponentFeedbackId(input.getOpponentFeedbackId());
-        document.setReaderFeedbackId(input.getReaderFeedbackId());
-        document.setDeleted(input.getDeleted());
-        document.setGradeNum(input.getGradeNum());
-        document.setOpponentId(input.getOpponentId());
-        document.setSupervisorId(input.getSupervisorId());
-        document.setGradePass(input.getGradePass());
-        return document;
-
     }
 
     private void updateDocument(Document document, DocumentDTO input)

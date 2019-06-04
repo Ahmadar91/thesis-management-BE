@@ -26,6 +26,9 @@ import java.util.regex.Pattern;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static se.lnu.thesis_mangment.configurations.SecurityConstants.*;
 
+/**
+ * The type Jwt authentication filter.
+ */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter
 {
     private AuthenticationManager authenticationManager;
@@ -33,6 +36,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private UserServices userServices;
 
 
+    /**
+     * Instantiates a new Jwt authentication filter.
+     *
+     * @param authenticationManager the authentication manager
+     * @param userServices          the user services
+     */
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, UserServices userServices)
     {
         this.authenticationManager = authenticationManager;

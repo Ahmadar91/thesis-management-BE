@@ -10,6 +10,9 @@ import se.lnu.thesis_mangment.services.UserServices;
 import javax.validation.Valid;
 import java.util.Map;
 
+/**
+ * The type Login controller.
+ */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/auth/")
@@ -20,6 +23,13 @@ public class LoginController extends Controller
     @Autowired
     private UserServices userService;
 
+    /**
+     * Login map.
+     *
+     * @param input the input
+     * @return the map
+     * @throws IllegalAccessException the illegal access exception
+     */
     @RequestMapping("/login")
     public Map<String, Object> login(@Valid UsersDTO input) throws IllegalAccessException
     {
@@ -32,26 +42,24 @@ public class LoginController extends Controller
         return response(new ResponseArgument<>(USER, userService.get(input)));
     }
 
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @GetMapping("/get")
     public Map<String, Object> get(@Valid UsersDTO input)
     {
         return response(new ResponseArgument<>(USER, userService.get(input)));
     }
 
-    private User setUser(UsersDTO input)
-    {
-        User user = new User();
-        user.setUsername(input.getUsername());
-        user.setFirstName(input.getFirstName());
-        user.setLastName(input.getLastName());
-        user.setPassword(input.getPassword());
-        user.setRoleId(input.getRoleId());
-        user.setEmail(input.getEmail());
-        user.setLastName(input.getEmail());
-        return user;
-    }
-
-
+    /**
+     * Update confirmation map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateConfirmation(@Valid UsersDTO input)
     {
@@ -70,6 +78,12 @@ public class LoginController extends Controller
         return response(new ResponseArgument<>(USER, user));
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param input the input
+     * @return the by id
+     */
     public User getById(UsersDTO input)
     {
         User user = userService.get(input);

@@ -15,6 +15,15 @@ repositories {
     mavenCentral()
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -35,5 +44,44 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.batch:spring-batch-test'
+}
+
+ef webappDir = "$projectDir/src/main/webapp"
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["$webappDir/dist", "$projectDir/src/main/resources"]
+        }
+    }
+}
+
+processResources {
+    dependsOn "buildAngular"
+}
+
+task buildAngular(type:Exec) {
+    // installAngular should be run prior to this task
+    dependsOn "installAngular"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    // Add task to the standard build group
+    group = BasePlugin.BUILD_GROUP
+    // ng doesn't exist as a file in windows -> ng.cmd
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+        commandLine "ng.cmd", "build"
+    } else {
+        commandLine "ng", "build"
+    }
+}
+
+task installAngular(type:Exec) {
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+        commandLine "npm.cmd", "install"
+    } else {
+        commandLine "npm", "install"
+    }
 }
 

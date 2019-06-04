@@ -16,9 +16,17 @@ import java.util.ArrayList;
 
 import static se.lnu.thesis_mangment.configurations.SecurityConstants.*;
 
+/**
+ * The type Jwt authorization filter.
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter
 {
 
+    /**
+     * Instantiates a new Jwt authorization filter.
+     *
+     * @param authManager the auth manager
+     */
     public JWTAuthorizationFilter(AuthenticationManager authManager)
     {
         super(authManager);

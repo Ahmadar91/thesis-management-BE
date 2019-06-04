@@ -18,6 +18,9 @@ import se.lnu.thesis_mangment.services.UserServices;
 import static se.lnu.thesis_mangment.configurations.SecurityConstants.SIGN_IN;
 
 
+/**
+ * The type Web security.
+ */
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter
 {
@@ -29,6 +32,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter
     private UserServices userServices;
 
 
+    /**
+     * Instantiates a new Web security.
+     *
+     * @param userDetailsService    the user details service
+     * @param bCryptPasswordEncoder the b crypt password encoder
+     */
     public WebSecurity(UserDetailsServiceImpl userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder)
     {
         this.userDetailsService = userDetailsService;
@@ -40,9 +49,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter
     {
         http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, SIGN_IN).permitAll().antMatchers(HttpMethod.POST, "/").permitAll().antMatchers(HttpMethod.GET, "/api/document/download").permitAll().antMatchers(HttpMethod.GET, "/api/supervisor-confirmation/get")
 
-                .permitAll().antMatchers(HttpMethod.GET, "/api/feedbacks/get").permitAll()
-
-                .anyRequest().authenticated().and().addFilter(new JWTAuthenticationFilter(authenticationManager(), userServices)).addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .permitAll().antMatchers(HttpMethod.GET, "/api/feedbacks/get").permitAll().antMatchers(HttpMethod.GET, "/api/document/download/1.pdf").permitAll().antMatchers(HttpMethod.GET, "/api/document/get").permitAll().anyRequest().authenticated().and().addFilter(new JWTAuthenticationFilter(authenticationManager(), userServices)).addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
@@ -53,6 +60,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
+    /**
+     * Cors configuration source cors configuration source.
+     *
+     * @return the cors configuration source
+     */
     @Bean
     CorsConfigurationSource corsConfigurationSource()
     {

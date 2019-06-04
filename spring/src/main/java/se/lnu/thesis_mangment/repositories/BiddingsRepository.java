@@ -9,9 +9,18 @@ import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * The type Biddings repository.
+ */
 @Repository
 public class BiddingsRepository extends BaseItemsRepository<Biddings>
 {
+    /**
+     * Get list.
+     *
+     * @param input the input
+     * @return the list
+     */
     public List<Biddings> get(BiddingsDTO input)
     {
         var searchBuilder = new BiddingsSearchBuilder(input);
@@ -19,6 +28,11 @@ public class BiddingsRepository extends BaseItemsRepository<Biddings>
         return selectAll(stmt, Biddings.class, searchBuilder.getParameterList());
     }
 
+    /**
+     * Add.
+     *
+     * @param biddings the biddings
+     */
     @Transactional
     public void add(Biddings biddings)
     {
@@ -28,6 +42,11 @@ public class BiddingsRepository extends BaseItemsRepository<Biddings>
 
     private class BiddingsSearchBuilder extends SearchBuilder
     {
+        /**
+         * Instantiates a new Biddings search builder.
+         *
+         * @param input the input
+         */
         BiddingsSearchBuilder(BiddingsDTO input)
         {
             if (input != null)

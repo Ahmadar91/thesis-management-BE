@@ -12,6 +12,9 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Map;
 
+/**
+ * The type User controller.
+ */
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/api/user")
@@ -26,12 +29,24 @@ public class UserController extends Controller
     private BCryptPasswordEncoder passwordEncoder;
 
 
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @GetMapping("/get")
     public Map<String, Object> get(@Valid UsersDTO input)
     {
         return response(new ResponseArgument<>(USER, userService.get(input)));
     }
 
+    /**
+     * Add map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/add")
     @Transactional
     public Map<String, Object> add(@Valid UsersDTO input)
@@ -56,6 +71,12 @@ public class UserController extends Controller
         return user;
     }
 
+    /**
+     * Update role map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/updateRole/{id}")
     public Map<String, Object> updateRole(@Valid UsersDTO input)
     {
@@ -66,6 +87,13 @@ public class UserController extends Controller
         userService.update(user);
         return response(new ResponseArgument<>(USER, user));
     }
+
+    /**
+     * Update user map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateUser(@Valid UsersDTO input)
     {
@@ -84,6 +112,12 @@ public class UserController extends Controller
         return response(new ResponseArgument<>(USER, user));
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param input the input
+     * @return the by id
+     */
     public User getById(UsersDTO input)
     {
         User user = userService.get(input);

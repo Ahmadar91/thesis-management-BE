@@ -9,11 +9,19 @@ import se.lnu.thesis_mangment.repositories.UsersRepository;
 
 import static java.util.Collections.emptyList;
 
+/**
+ * The type User details service.
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService
 {
     private UsersRepository repository;
 
+    /**
+     * Instantiates a new User details service.
+     *
+     * @param usersRepository the users repository
+     */
     public UserDetailsServiceImpl(UsersRepository usersRepository)
     {
         this.repository = usersRepository;

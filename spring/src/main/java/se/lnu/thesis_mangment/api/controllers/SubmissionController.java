@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * The type Submission controller.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/submission")
@@ -25,12 +28,25 @@ public class SubmissionController extends Controller
     private SubmissionServices submissionServices;
 
 
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @GetMapping(value = "/get")
     public Map<String, Object> get(@Valid SubmissionDTO input)
     {
         return response(new ResponseArgument<>(SUBMISSION, submissionServices.get(input)));
     }
 
+    /**
+     * Add map.
+     *
+     * @param input the input
+     * @return the map
+     * @throws IOException the io exception
+     */
     @PostMapping(value = "/add")
     @Transactional
     public Map<String, Object> add(@Valid SubmissionDTO input) throws IOException
@@ -41,6 +57,12 @@ public class SubmissionController extends Controller
     }
 
 
+    /**
+     * Update feedbacks map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateFeedbacks(@Valid SubmissionDTO input)
     {
@@ -51,6 +73,12 @@ public class SubmissionController extends Controller
         return response(new ResponseArgument<>(SUBMISSION, submission));
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param input the input
+     * @return the by id
+     */
     public Submission getById(@Valid SubmissionDTO input)
     {
         List<Submission> submissions = submissionServices.get(input);
@@ -61,6 +89,12 @@ public class SubmissionController extends Controller
         return submissions.get(0);
     }
 
+    /**
+     * Delete map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @RequestMapping("/remove/{id}")
     @Transactional
     public Map<String, Object> delete(@Valid SubmissionDTO input)

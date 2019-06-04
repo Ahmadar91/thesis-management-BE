@@ -15,32 +15,54 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * The type Biddings controller.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/biddings")
 public class BiddingsController extends Controller
 {
-    private static final String Bidding = "bidding";
+    private static final String BIDDING = "bidding";
     @Autowired
     private BiddingsServices biddingsServices;
 
 
+    /**
+     * Get map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @GetMapping(value = "/get")
     public Map<String, Object> get(@Valid BiddingsDTO input)
     {
-        return response(new ResponseArgument<>(Bidding, biddingsServices.get(input)));
+        return response(new ResponseArgument<>(BIDDING, biddingsServices.get(input)));
     }
 
+    /**
+     * Add map.
+     *
+     * @param input the input
+     * @return the map
+     * @throws IOException the io exception
+     */
     @PostMapping(value = "/add")
     @Transactional
     public Map<String, Object> add(@Valid BiddingsDTO input) throws IOException
     {
         Biddings biddings = getBiddingsFromInput(input);
         biddingsServices.add(biddings);
-        return response(new ResponseArgument<>(Bidding, biddings));
+        return response(new ResponseArgument<>(BIDDING, biddings));
     }
 
 
+    /**
+     * Update biddings map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @PostMapping(value = "/update/{id}")
     public Map<String, Object> updateBiddings(@Valid BiddingsDTO input)
     {
@@ -48,9 +70,15 @@ public class BiddingsController extends Controller
         dInput.setId(input.getId());
         Biddings biddings = getById(dInput);
         updateBiddings(biddings, input);
-        return response(new ResponseArgument<>(Bidding, biddings));
+        return response(new ResponseArgument<>(BIDDING, biddings));
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param input the input
+     * @return the by id
+     */
     public Biddings getById(@Valid BiddingsDTO input)
     {
         List<Biddings> biddings = biddingsServices.get(input);
@@ -61,6 +89,12 @@ public class BiddingsController extends Controller
         return biddings.get(0);
     }
 
+    /**
+     * Delete map.
+     *
+     * @param input the input
+     * @return the map
+     */
     @RequestMapping("/remove/{id}")
     @Transactional
     public Map<String, Object> delete(@Valid BiddingsDTO input)
@@ -69,7 +103,7 @@ public class BiddingsController extends Controller
         List<Long> list = new ArrayList<>();
         list.add(input.getId());
         biddingsServices.delete(list);
-        return response(new ResponseArgument<>(Bidding, newBiddings));
+        return response(new ResponseArgument<>(BIDDING, newBiddings));
     }
 
     private Biddings getBiddingsFromInput(BiddingsDTO input)

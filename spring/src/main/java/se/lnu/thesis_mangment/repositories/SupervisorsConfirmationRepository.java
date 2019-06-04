@@ -9,18 +9,31 @@ import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * The type Supervisors confirmation repository.
+ */
 @Repository
 public class SupervisorsConfirmationRepository extends BaseItemsRepository<SupervisorsConfirmation>
 {
+    /**
+     * Get list.
+     *
+     * @param input the input
+     * @return the list
+     */
     public List<SupervisorsConfirmation> get(SupervisorsConfirmationDTO input)
     {
         var searchBuilder = new SupervisorConfirmationBuilder(input);
-        //var stmt = "FROM SupervisorsConfirmation AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         var stmt = "FROM SupervisorsConfirmation AS t " + "left join fetch t.user " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
 
         return selectAll(stmt, SupervisorsConfirmation.class, searchBuilder.getParameterList());
     }
 
+    /**
+     * Add.
+     *
+     * @param supervisorsConfirmation the supervisors confirmation
+     */
     @Transactional
     public void add(SupervisorsConfirmation supervisorsConfirmation)
     {
@@ -30,6 +43,11 @@ public class SupervisorsConfirmationRepository extends BaseItemsRepository<Super
 
     private class SupervisorConfirmationBuilder extends SearchBuilder
     {
+        /**
+         * Instantiates a new Supervisor confirmation builder.
+         *
+         * @param input the input
+         */
         SupervisorConfirmationBuilder(SupervisorsConfirmationDTO input)
         {
             if (input != null)

@@ -10,19 +10,32 @@ import se.lnu.thesis_mangment.repositories.query.SearchBuilder;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * The type Users repository.
+ */
 @Repository
 public class UsersRepository extends BaseItemsRepository<User>
 {
+    /**
+     * Get list.
+     *
+     * @param input the input
+     * @return the list
+     */
     public List<User> get(UsersDTO input)
     {
         var searchBuilder = new UsersSearchBuilder(input);
-        //   var stmt = "FROM User AS t " + "left join fetch t.role " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
-
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 " + searchBuilder.getStatement();
         return selectAll(stmt, User.class, searchBuilder.getParameterList());
     }
 
-    // can be used to authinticate a user
+    /**
+     * Gets user.
+     *
+     * @param inputs the inputs
+     * @return the user
+     */
+// can be used to authinticate a user
     public User getUser(UsersDTO inputs)
     {
         var searchBuilder = new UsersSearchBuilder(inputs);
@@ -30,12 +43,23 @@ public class UsersRepository extends BaseItemsRepository<User>
         return select(stmt, User.class, searchBuilder.getParameterList());
     }
 
+    /**
+     * Find by username user.
+     *
+     * @param username the username
+     * @return the user
+     */
     public User findByUsername(String username)
     {
         var stmt = "FROM User AS t " + "where " + "t.deleted = 0 and t.username = :username";
         return select(stmt, User.class, new Parameter<>("username", username));
     }
 
+    /**
+     * Add.
+     *
+     * @param user the user
+     */
     @Transactional
     public void add(User user)
     {
@@ -45,6 +69,11 @@ public class UsersRepository extends BaseItemsRepository<User>
 
     private class UsersSearchBuilder extends SearchBuilder
     {
+        /**
+         * Instantiates a new Users search builder.
+         *
+         * @param input the input
+         */
         UsersSearchBuilder(UsersDTO input)
         {
             if (input != null)
